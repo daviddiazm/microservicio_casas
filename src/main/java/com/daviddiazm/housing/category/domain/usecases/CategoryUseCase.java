@@ -1,5 +1,6 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
+import com.daviddiazm.housing.category.domain.dtos.requests.PaginationRequest;
 import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExist;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.ports.in.CategoryServicePort;
@@ -22,6 +23,26 @@ public class CategoryUseCase implements CategoryServicePort {
         }
         categoryPersistencePort.save(categoryModel);
     }
+
+    @Override
+    public List<CategoryModel> getCategoriesByName(String name) {
+        List<CategoryModel> listCategories = categoryPersistencePort.getCategoriesByName(name);
+        if(listCategories.isEmpty()) {
+//          no existe una categoria con ese nombre
+        }
+        if(name.length() < 3) {
+//            throw new (debe ingresar una palabra mayor a tres caracteres)
+//            quisiersa saber como usualmente ellos gestionan los errores
+        }
+
+        return listCategories;
+    }
+
+    @Override
+    public List<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest) {
+        return categoryPersistencePort.getCategoriesPaginated(paginationRequest);
+    }
+
 
     @Override
     public List<CategoryModel> getAllCategories() {

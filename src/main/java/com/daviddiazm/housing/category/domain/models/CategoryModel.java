@@ -4,6 +4,7 @@ import com.daviddiazm.housing.category.domain.exceptions.DescriptionMaxException
 import com.daviddiazm.housing.category.domain.exceptions.DescriptionMinException;
 import com.daviddiazm.housing.category.domain.exceptions.NameMaxException;
 import com.daviddiazm.housing.category.domain.exceptions.NameMinException;
+import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
 
 import java.util.Objects;
 
@@ -37,7 +38,7 @@ public class CategoryModel {
         if(name.length() > 50 ) {
             throw new NameMaxException("Numero Maximo de caracteres es 50");
         }
-        this.name = Objects.requireNonNull(name, "El nombre no puede ser nulo");
+        this.name = Objects.requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
     }
     public String getDescription() {
         return description;
@@ -50,6 +51,6 @@ public class CategoryModel {
         if(description.length() > 90) {
             throw new DescriptionMaxException("Numero maximo de caracteres es 90");
         }
-        this.description = Objects.requireNonNull(description, "La descripcion no puede ser nulo");
+        this.description = Objects.requireNonNull(description,DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 }
