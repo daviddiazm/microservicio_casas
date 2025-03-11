@@ -42,7 +42,6 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
         Pageable pagination;
         int page = paginationRequest.getPage();
         int size = paginationRequest.getSize();
-        boolean isOrderAsc = paginationRequest.isOrderAsc();
         if (paginationRequest.isOrderAsc()) {
             pagination = PageRequest.of(page, size, Sort.by("name").ascending());
         } else {

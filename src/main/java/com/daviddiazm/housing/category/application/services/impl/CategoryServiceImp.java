@@ -9,6 +9,7 @@ import com.daviddiazm.housing.category.application.services.CategoryService;
 import com.daviddiazm.housing.category.domain.ports.in.CategoryServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.daviddiazm.housing.commons.configurations.utils.Constants;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,10 +21,11 @@ public class CategoryServiceImp implements CategoryService {
     private final CategoryDtoMapper categoryDtoMapper;
     private final CategoryServicePort categoryServicePort;
 
+
     @Override
     public SaveCategoryResponse save(SaveCategoryRequest request) {
         categoryServicePort.save( categoryDtoMapper.requestToModel(request) );
-        return new SaveCategoryResponse("se creo satisfactoriamente", LocalDateTime.now());
+        return new SaveCategoryResponse(Constants.SAVE_CATEGORY_RESPONSE_MESSAGE, LocalDateTime.now());
     }
 
     @Override
@@ -32,4 +34,5 @@ public class CategoryServiceImp implements CategoryService {
                 categoryServicePort.getCategoriesPaginated(categoryDtoMapper.toPaginationRequest(paginationRequest))
         );
     }
+
 }
