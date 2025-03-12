@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+//import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
@@ -28,10 +28,10 @@ class CategoryServiceImpTest {
     private CategoryServiceImp categoryServiceImp;
 
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.initMocks(this);
+//    }
 
     @Test
     void When_CategoryInformationIsCorrect_Expect_CategorySaveResponseMassege() {
@@ -41,7 +41,7 @@ class CategoryServiceImpTest {
         SaveCategoryRequest request = new SaveCategoryRequest(categoryName, categoryDescription);
         String textExpected = "Category created successfully.";
 //        ejecucion
-        SaveCategoryResponse response = categoryServiceImp.save(request);
+        SaveCategoryResponse response = categoryServiceImp.saveCategory(request);
 //        verificacion
         assertEquals(textExpected, response.message());
 

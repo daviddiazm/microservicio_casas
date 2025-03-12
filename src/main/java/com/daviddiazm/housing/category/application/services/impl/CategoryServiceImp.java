@@ -23,8 +23,8 @@ public class CategoryServiceImp implements CategoryService {
 
 
     @Override
-    public SaveCategoryResponse save(SaveCategoryRequest request) {
-        categoryServicePort.save( categoryDtoMapper.requestToModel(request) );
+    public SaveCategoryResponse saveCategory(SaveCategoryRequest request) {
+        categoryServicePort.saveCategory( categoryDtoMapper.requestToModel(request) );
         return new SaveCategoryResponse(Constants.SAVE_CATEGORY_RESPONSE_MESSAGE, LocalDateTime.now());
     }
 

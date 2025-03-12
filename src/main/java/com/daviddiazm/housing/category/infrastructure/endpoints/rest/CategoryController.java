@@ -22,7 +22,7 @@ public class CategoryController {
 
     @PostMapping("/")
     public ResponseEntity<SaveCategoryResponse> save(@RequestBody SaveCategoryRequest saveCategoryRequest) {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(saveCategoryRequest));
+        return  ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveCategory(saveCategoryRequest));
     }
 
     @GetMapping("/")

@@ -8,6 +8,6 @@ import com.daviddiazm.housing.category.application.dtos.responses.SaveCategoryRe
 import java.util.List;
 
 public interface CategoryService {
-    SaveCategoryResponse save(SaveCategoryRequest saveCategoryRequest);
+    SaveCategoryResponse saveCategory(SaveCategoryRequest saveCategoryRequest);
     List<CategoryResponse> getCategoriesPaginated(GetPaginationRequest paginationRequest);
 }

@@ -23,7 +23,7 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
     private final CategoryEntityMapper categoryEntityMapper;
 
     @Override
-    public void save(CategoryModel categoryModel) {
+    public void saveCategory(CategoryModel categoryModel) {
         categoryRepository.save(categoryEntityMapper.modelToEntity(categoryModel));
     }
 
@@ -50,8 +50,5 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
         return categoryEntityMapper.entityListToModelList(categoryRepository.findAll(pagination).getContent());
     }
 
-    @Override
-    public List<CategoryModel> getAllCategories() {
-        return List.of();
-    }
+
 }
