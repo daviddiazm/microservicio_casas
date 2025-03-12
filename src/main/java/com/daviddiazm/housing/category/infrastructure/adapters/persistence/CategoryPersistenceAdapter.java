@@ -1,10 +1,14 @@
 package com.daviddiazm.housing.category.infrastructure.adapters.persistence;
 
+import com.daviddiazm.housing.category.domain.dtos.requests.PaginationRequest;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
 import com.daviddiazm.housing.category.infrastructure.mappers.CategoryEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +23,7 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
     private final CategoryEntityMapper categoryEntityMapper;
 
     @Override
-    public void save(CategoryModel categoryModel) {
+    public void saveCategory(CategoryModel categoryModel) {
         categoryRepository.save(categoryEntityMapper.modelToEntity(categoryModel));
     }
 
@@ -29,7 +33,22 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
     }
 
     @Override
-    public List<CategoryModel> getAllCategories() {
+    public List<CategoryModel> getCategoriesByName(String categoryName) {
         return List.of();
     }
+
+    @Override
+    public List<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest) {
+        Pageable pagination;
+        int page = paginationRequest.getPage();
+        int size = paginationRequest.getSize();
+        if (paginationRequest.isOrderAsc()) {
+            pagination = PageRequest.of(page, size, Sort.by("name").ascending());
+        } else {
+            pagination = PageRequest.of(page, size, Sort.by("name").descending());
+        }
+        return categoryEntityMapper.entityListToModelList(categoryRepository.findAll(pagination).getContent());
+    }
+
+
 }
