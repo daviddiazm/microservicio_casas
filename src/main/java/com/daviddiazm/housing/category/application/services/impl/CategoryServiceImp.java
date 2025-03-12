@@ -35,4 +35,9 @@ public class CategoryServiceImp implements CategoryService {
         );
     }
 
+    @Override
+    public List<CategoryResponse> getCategotiesByName(String categoryName) {
+        return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategoriesByName(categoryName));
+    }
+
 }

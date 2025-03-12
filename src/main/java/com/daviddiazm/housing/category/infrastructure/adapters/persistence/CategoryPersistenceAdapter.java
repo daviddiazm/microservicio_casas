@@ -34,7 +34,8 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
 
     @Override
     public List<CategoryModel> getCategoriesByName(String categoryName) {
-        return List.of();
+
+        return categoryEntityMapper.entityListToModelList(categoryRepository.findByNameContaining(categoryName));
     }
 
     @Override

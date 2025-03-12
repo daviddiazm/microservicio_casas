@@ -10,4 +10,5 @@ import java.util.List;
 public interface CategoryService {
     SaveCategoryResponse saveCategory(SaveCategoryRequest saveCategoryRequest);
     List<CategoryResponse> getCategoriesPaginated(GetPaginationRequest paginationRequest);
+    List<CategoryResponse> getCategotiesByName(String categoryName);
 }

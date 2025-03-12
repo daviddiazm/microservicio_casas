@@ -29,4 +29,9 @@ public class CategoryController {
     public ResponseEntity<List<CategoryResponse>> getCategoriesPaged (@RequestBody GetPaginationRequest paginationBody) {
         return ResponseEntity.ok().body(categoryService.getCategoriesPaginated(paginationBody));
     }
+
+    @GetMapping("/by-name/{categoryName}")
+    public ResponseEntity<List<CategoryResponse>> getCategoriesByName (@PathVariable String categoryName) {
+        return ResponseEntity.ok().body(categoryService.getCategotiesByName(categoryName));
+    }
 }
