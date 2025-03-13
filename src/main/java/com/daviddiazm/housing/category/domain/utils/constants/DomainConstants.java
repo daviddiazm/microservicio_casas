@@ -5,6 +5,12 @@ public class DomainConstants {
         throw new IllegalStateException("Utily class");
     }
 
+    public static final int MIN_NAME_CARACTER_LENGTH = 3;
+    public static final int MAX_NAME_CARACTER_LENGTH = 50;
+
+    public static final int MIN_DESCRIPTION_CARACTER_LENGTH = 10;
+    public static final int MAX_DESCRIPTION_CARACTER_LENGTH = 90;
+
 
     public static final String FIELD_NAME_NULL_MESSAGE = "Field 'name' can not be null";
     public static final String FIELD_DESCRIPTION_NULL_MESSAGE = "Field 'description' can not be null";

@@ -1,6 +1,6 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
-import com.daviddiazm.housing.category.domain.dtos.requests.PaginationRequest;
+import com.daviddiazm.housing.category.domain.models.PaginationRequest;
 import com.daviddiazm.housing.category.domain.exceptions.*;
 import com.daviddiazm.housing.category.domain.models.CategoryFactory;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;

@@ -1,6 +1,7 @@
 package com.daviddiazm.housing.category.domain.ports.in;
 
-import com.daviddiazm.housing.category.domain.dtos.requests.PaginationRequest;
+import com.daviddiazm.housing.category.domain.models.PagedResult;
+import com.daviddiazm.housing.category.domain.models.PaginationRequest;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 
 import java.util.List;
@@ -10,6 +11,6 @@ public interface CategoryServicePort {
 
     List<CategoryModel> getCategoriesByName(String name);
 
-    List<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest);
+    PagedResult<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest);
 
 }

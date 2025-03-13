@@ -11,10 +11,10 @@ public class CategoryValidator {
         if (name == null) {
             throw new IllegalArgumentException(DomainConstants.FIELD_NAME_NULL_MESSAGE);
         }
-        if (name.length() < 3) {
+        if (name.length() < DomainConstants.MAX_NAME_CARACTER_LENGTH) {
             throw new NameMinException(DomainConstants.DESCRIPTION_MIN_LENGHT);
         }
-        if (name.length() > 50) {
+        if (name.length() > DomainConstants.MAX_NAME_CARACTER_LENGTH) {
             throw new NameMaxException(DomainConstants.DESCRIPTION_MAX_LENGHT);
         }
     }
@@ -23,10 +23,10 @@ public class CategoryValidator {
         if (description == null) {
             throw new IllegalArgumentException(DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
         }
-        if (description.length() < 10) {
+        if (description.length() < DomainConstants.MIN_DESCRIPTION_CARACTER_LENGTH) {
             throw new DescriptionMinException(DomainConstants.DESCRIPTION_MIN_LENGHT);
         }
-        if (description.length() > 90) {
+        if (description.length() > DomainConstants.MAX_DESCRIPTION_CARACTER_LENGTH) {
             throw new DescriptionMaxException(DomainConstants.DESCRIPTION_MAX_LENGHT);
         }
     }

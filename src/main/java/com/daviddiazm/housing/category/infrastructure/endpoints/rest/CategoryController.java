@@ -4,8 +4,10 @@ package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 import com.daviddiazm.housing.category.application.dtos.requests.GetPaginationRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveCategoryRequest;
 import com.daviddiazm.housing.category.application.dtos.responses.CategoryResponse;
+import com.daviddiazm.housing.category.application.dtos.responses.PagedResultResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveCategoryResponse;
 import com.daviddiazm.housing.category.application.services.CategoryService;
+import com.daviddiazm.housing.category.domain.models.PagedResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class CategoryController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CategoryResponse>> getCategoriesPaged (@RequestBody GetPaginationRequest paginationBody) {
+    public ResponseEntity<PagedResultResponse<CategoryResponse>> getCategoriesPaged (@RequestBody GetPaginationRequest paginationBody) {
         return ResponseEntity.ok().body(categoryService.getCategoriesPaginated(paginationBody));
     }
 

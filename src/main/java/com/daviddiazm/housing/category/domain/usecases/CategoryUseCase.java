@@ -1,6 +1,7 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
-import com.daviddiazm.housing.category.domain.dtos.requests.PaginationRequest;
+import com.daviddiazm.housing.category.domain.models.PagedResult;
+import com.daviddiazm.housing.category.domain.models.PaginationRequest;
 import com.daviddiazm.housing.category.domain.exceptions.CategoryNotExist;
 import com.daviddiazm.housing.category.domain.exceptions.DescriptionMaxException;
 import com.daviddiazm.housing.category.domain.exceptions.DescriptionMinException;
@@ -35,9 +36,9 @@ public class CategoryUseCase implements CategoryServicePort {
         if(listCategories.isEmpty()) {
           throw new CategoryNotExist(DomainConstants.CATEGORY_NO_EXIST);
         }
-        if(name.length() < 3) {
+        if(name.length() < DomainConstants.MIN_NAME_CARACTER_LENGTH) {
             throw new DescriptionMinException(DomainConstants.DESCRIPTION_MIN_LENGHT);
-        } else if (name.length() >50 ) {
+        } else if (name.length() > DomainConstants.MAX_NAME_CARACTER_LENGTH ) {
             throw new DescriptionMaxException(DomainConstants.DESCRIPTION_MAX_LENGHT);
         }
 
@@ -45,7 +46,7 @@ public class CategoryUseCase implements CategoryServicePort {
     }
 
     @Override
-    public List<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest) {
+    public PagedResult<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest) {
         return categoryPersistencePort.getCategoriesPaginated(paginationRequest);
     }
 
