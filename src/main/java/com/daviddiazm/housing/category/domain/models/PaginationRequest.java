@@ -1,4 +1,4 @@
-package com.daviddiazm.housing.category.domain.dtos.requests;
+package com.daviddiazm.housing.category.domain.models;
 
 public class PaginationRequest {
     private int page;
