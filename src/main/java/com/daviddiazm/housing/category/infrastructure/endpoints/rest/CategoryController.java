@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {
-
     private final CategoryService categoryService;
 
     @PostMapping("/")
@@ -27,9 +26,14 @@ public class CategoryController {
         return  ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveCategory(saveCategoryRequest));
     }
 
+
     @GetMapping("/")
-    public ResponseEntity<PagedResultResponse<CategoryResponse>> getCategoriesPaged (@RequestBody GetPaginationRequest paginationBody) {
-        return ResponseEntity.ok().body(categoryService.getCategoriesPaginated(paginationBody));
+    public ResponseEntity<PagedResultResponse<CategoryResponse>> getCategoriesPaged(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam boolean orderAsc) {
+
+        return ResponseEntity.ok().body(categoryService.getCategoriesPaginated(page, size, orderAsc));
     }
 
     @GetMapping("/by-name/{categoryName}")

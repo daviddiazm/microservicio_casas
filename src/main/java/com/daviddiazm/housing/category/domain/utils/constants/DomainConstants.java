@@ -5,6 +5,8 @@ public class DomainConstants {
         throw new IllegalStateException("Utily class");
     }
 
+    public static final String FIELD_ORDER_PAGINATION = "name";
+
     public static final int MIN_NAME_CARACTER_LENGTH = 3;
     public static final int MAX_NAME_CARACTER_LENGTH = 50;
 

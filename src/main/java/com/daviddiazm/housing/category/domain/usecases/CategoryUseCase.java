@@ -1,7 +1,6 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
 import com.daviddiazm.housing.category.domain.models.PagedResult;
-import com.daviddiazm.housing.category.domain.models.PaginationRequest;
 import com.daviddiazm.housing.category.domain.exceptions.CategoryNotExist;
 import com.daviddiazm.housing.category.domain.exceptions.DescriptionMaxException;
 import com.daviddiazm.housing.category.domain.exceptions.DescriptionMinException;
@@ -46,8 +45,8 @@ public class CategoryUseCase implements CategoryServicePort {
     }
 
     @Override
-    public PagedResult<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest) {
-        return categoryPersistencePort.getCategoriesPaginated(paginationRequest);
+    public PagedResult<CategoryModel> getCategoriesPaginated(int page, int size, boolean orderAsc) {
+        return categoryPersistencePort.getCategoriesPaginated(page, size, orderAsc);
     }
 
 

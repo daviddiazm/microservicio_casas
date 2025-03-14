@@ -1,6 +1,5 @@
 package com.daviddiazm.housing.category.application.services.impl;
 
-import com.daviddiazm.housing.category.application.dtos.requests.GetPaginationRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveCategoryRequest;
 import com.daviddiazm.housing.category.application.dtos.responses.CategoryResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.PagedResultResponse;
@@ -9,7 +8,6 @@ import com.daviddiazm.housing.category.application.mappers.CategoryDtoMapper;
 import com.daviddiazm.housing.category.application.services.CategoryService;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
-import com.daviddiazm.housing.category.domain.models.PaginationRequest;
 import com.daviddiazm.housing.category.domain.ports.in.CategoryServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,9 +31,8 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public PagedResultResponse<CategoryResponse> getCategoriesPaginated(GetPaginationRequest paginationRequest) {
-        PaginationRequest paginationRequesModel =  categoryDtoMapper.toPaginationRequest(paginationRequest);
-        PagedResult<CategoryModel> pagedResult = categoryServicePort.getCategoriesPaginated(paginationRequesModel);
+    public PagedResultResponse<CategoryResponse> getCategoriesPaginated(int page, int size, boolean orderAsc) {
+        PagedResult<CategoryModel> pagedResult = categoryServicePort.getCategoriesPaginated(page, size, orderAsc);
         List<CategoryModel> categories = pagedResult.getContent();
         List<CategoryResponse> categoryResponses = categoryDtoMapper.modelListToResponseList(categories);
         return new PagedResultResponse<>(
