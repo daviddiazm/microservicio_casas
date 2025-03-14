@@ -11,7 +11,7 @@ public class CategoryValidator {
         if (name == null) {
             throw new IllegalArgumentException(DomainConstants.FIELD_NAME_NULL_MESSAGE);
         }
-        if (name.length() < DomainConstants.MAX_NAME_CARACTER_LENGTH) {
+        if (name.length() < DomainConstants.MIN_NAME_CARACTER_LENGTH) {
             throw new NameMinException(DomainConstants.DESCRIPTION_MIN_LENGHT);
         }
         if (name.length() > DomainConstants.MAX_NAME_CARACTER_LENGTH) {
