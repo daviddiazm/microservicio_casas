@@ -13,7 +13,6 @@ public class DomainConstants {
     public static final int MIN_DESCRIPTION_CARACTER_LENGTH = 10;
     public static final int MAX_DESCRIPTION_CARACTER_LENGTH = 90;
 
-
     public static final String FIELD_NAME_NULL_MESSAGE = "Field 'name' can not be null";
     public static final String FIELD_DESCRIPTION_NULL_MESSAGE = "Field 'description' can not be null";
 
@@ -22,5 +21,12 @@ public class DomainConstants {
 
     public static final String NAME_ALREADY_EXIST = "The name is already exist";
     public static final String CATEGORY_NO_EXIST = "The category not exist";
+
+    public static final String PAGE_MIN_VALUE_PAGE = "The minimum size for page is '0' ";
+    public static final String PAGE_MIN_VALUE_SIZE = "The minimum size for size is '0'";
+    public static final int MIN_VALUE_PAGE = 0;
+    public static final int MIN_VALUE_SIZE = 1;
+
+
 
 }

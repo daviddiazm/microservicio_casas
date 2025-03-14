@@ -12,9 +12,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
+//@EnableSwagger2
 public class BeanConfiguration {
     private final CategoryRepository categoryRepository;
     private final CategoryEntityMapper categoryEntityMapper;
+
+
 
     @Bean
     public CategoryServicePort categoryServicePort() {
