@@ -5,7 +5,7 @@ import com.daviddiazm.housing.category.application.dtos.responses.CategoryRespon
 import com.daviddiazm.housing.category.application.dtos.responses.PagedResultResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveCategoryResponse;
 import com.daviddiazm.housing.category.application.services.CategoryService;
-import com.daviddiazm.housing.commons.configurations.utils.Constants;
+import com.daviddiazm.housing.category.infrastructure.exceptionshandler.ExceptionResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -67,6 +67,22 @@ public class CategoryController {
                                     mediaType = "application/json",
                                     schema = @Schema( implementation = SaveCategoryResponse.class)
                             )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Se ingresaron los datos de manera incorrecta",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = ExceptionResponse.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "409",
+                            description = "Ingreso una categoria que ya existe",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = ExceptionResponse.class)
+                            )
                     )
             }
 
@@ -77,6 +93,48 @@ public class CategoryController {
 
 
     @GetMapping("/")
+    @Operation(
+            method = "GET",
+            summary = "Obtener una lista de categorias paginadas",
+            description = "Este endpont se utiliza para mostrar las categorias paginadas",
+            tags = {"Categorias"},
+            parameters = {
+                    @Parameter(
+                            name = "page",
+                            description = "La pagina en la que quiere estar ubicado",
+                            example = "1"
+                    ),
+                    @Parameter(
+                            name = "size",
+                            description = "La cantidad de categorias que quiere ver en una pagina",
+                            example = "50"
+                    ),
+                    @Parameter(
+                            name = "orderAsc",
+                            description = "Este parametro cumple la funcion de traer las categorias ordenadas de manera alfabetica con respecto a su nombre",
+                            example = "true"
+                    )
+            },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Se logro obtener las categorias paginadas en la base de datos",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = PagedResultResponse.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Se ingresaron los datos de manera incorrecta",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = ExceptionResponse.class)
+                            )
+                    )
+            }
+
+    )
     public ResponseEntity<PagedResultResponse<CategoryResponse>> getCategoriesPaged(
             @RequestParam int page,
             @RequestParam int size,
@@ -85,7 +143,9 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.getCategoriesPaginated(page, size, orderAsc));
     }
 
+
     @GetMapping("/by-name/{categoryName}")
+    @Operation(deprecated = true)
     public ResponseEntity<List<CategoryResponse>> getCategoriesByName (@PathVariable String categoryName) {
         return ResponseEntity.ok().body(categoryService.getCategotiesByName(categoryName));
     }

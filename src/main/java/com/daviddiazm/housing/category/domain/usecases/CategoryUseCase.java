@@ -26,6 +26,8 @@ public class CategoryUseCase implements CategoryServicePort {
         }
         CategoryValidator.validateName(categoryModel.getName());
         CategoryValidator.validateDescription(categoryModel.getDescription());
+        categoryModel.setName(categoryModel.getName().toLowerCase());
+        categoryModel.setDescription(categoryModel.getDescription().toLowerCase());
         categoryPersistencePort.saveCategory(categoryModel);
     }
 
@@ -47,10 +49,10 @@ public class CategoryUseCase implements CategoryServicePort {
     @Override
     public PagedResult<CategoryModel> getCategoriesPaginated(int page, int size, boolean orderAsc) {
         if(page < DomainConstants.MIN_VALUE_PAGE) {
-            throw new PageMinNumbre(DomainConstants.PAGE_MIN_VALUE_PAGE);
+            throw new PageMinNumbrePage(DomainConstants.PAGE_MIN_VALUE_PAGE);
         }
         if(size < DomainConstants.MIN_VALUE_SIZE) {
-            throw new PageMinNumbre(DomainConstants.PAGE_MIN_VALUE_SIZE);
+            throw new PageMinNumbreSize(DomainConstants.PAGE_MIN_VALUE_SIZE);
         }
         return categoryPersistencePort.getCategoriesPaginated(page, size, orderAsc);
     }
