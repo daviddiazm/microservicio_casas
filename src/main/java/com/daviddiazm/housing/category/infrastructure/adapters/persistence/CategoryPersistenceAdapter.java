@@ -1,12 +1,13 @@
 package com.daviddiazm.housing.category.infrastructure.adapters.persistence;
 
 import com.daviddiazm.housing.category.domain.models.PagedResult;
-import com.daviddiazm.housing.category.domain.models.PaginationRequest;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
+import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
 import com.daviddiazm.housing.category.infrastructure.entities.CategoryEntity;
 import com.daviddiazm.housing.category.infrastructure.mappers.CategoryEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.CategoryRepository;
+import com.daviddiazm.housing.commons.configurations.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,7 +33,7 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
 
     @Override
     public CategoryModel getCategoryByName(String categoryName) {
-        return null;
+        return categoryEntityMapper.entityCategoryToCategoryModel(categoryRepository.findByName(categoryName));
     }
 
     @Override
@@ -42,24 +43,21 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
     }
 
     @Override
-    public PagedResult<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest) {
+    public PagedResult<CategoryModel> getCategoriesPaginated(int page, int size, boolean orderAsc) {
         Pageable pagination;
-        int page = paginationRequest.getPage();
-        int size = paginationRequest.getSize();
-        if (paginationRequest.isOrderAsc()) {
-            pagination = PageRequest.of(page, size, Sort.by("name").ascending());
+        if (orderAsc) {
+            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());
         } else {
-            pagination = PageRequest.of(page, size, Sort.by("name").descending());
+            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
         }
         Page<CategoryEntity> categoryPage = categoryRepository.findAll(pagination);
-
         List<CategoryModel> cagories = categoryEntityMapper.entityListToModelList(categoryRepository.findAll(pagination).getContent());
 
-        return new PagedResult<CategoryModel>(
+        return new PagedResult<>(
                 cagories,
-                paginationRequest.getPage(),
-                paginationRequest.getSize(),
-                paginationRequest.isOrderAsc(),
+                page,
+                size,
+                orderAsc,
                 categoryPage.getTotalElements(),
                 categoryPage.getTotalPages()
         );

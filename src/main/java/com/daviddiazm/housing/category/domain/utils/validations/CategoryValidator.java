@@ -7,15 +7,18 @@ import com.daviddiazm.housing.category.domain.exceptions.NameMinException;
 import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
 
 public class CategoryValidator {
+
+    private CategoryValidator(){}
+
     public static void validateName(String name) {
         if (name == null) {
             throw new IllegalArgumentException(DomainConstants.FIELD_NAME_NULL_MESSAGE);
         }
-        if (name.length() < DomainConstants.MAX_NAME_CARACTER_LENGTH) {
-            throw new NameMinException(DomainConstants.DESCRIPTION_MIN_LENGHT);
+        if (name.length() < DomainConstants.MIN_NAME_CARACTER_LENGTH) {
+            throw new NameMinException(DomainConstants.NAME_MIN_LENGHT);
         }
         if (name.length() > DomainConstants.MAX_NAME_CARACTER_LENGTH) {
-            throw new NameMaxException(DomainConstants.DESCRIPTION_MAX_LENGHT);
+            throw new NameMaxException(DomainConstants.NAME_MAX_LENGHT);
         }
     }
 
