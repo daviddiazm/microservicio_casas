@@ -1,15 +1,12 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
+import com.daviddiazm.housing.category.domain.exceptions.*;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
-import com.daviddiazm.housing.category.domain.models.PaginationRequest;
-import com.daviddiazm.housing.category.domain.exceptions.CategoryNotExist;
-import com.daviddiazm.housing.category.domain.exceptions.DescriptionMaxException;
-import com.daviddiazm.housing.category.domain.exceptions.DescriptionMinException;
-import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExist;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.ports.in.CategoryServicePort;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
 import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
+import com.daviddiazm.housing.category.domain.utils.validations.CategoryValidator;
 
 import java.util.List;
 
@@ -23,10 +20,14 @@ public class CategoryUseCase implements CategoryServicePort {
 
     @Override
     public void saveCategory(CategoryModel categoryModel) {
-        CategoryModel category = categoryPersistencePort.getCategoryByName(categoryModel.getName());
-        if(category != null) {
+        CategoryModel categoryExist = categoryPersistencePort.getCategoryByName(categoryModel.getName());
+        if(categoryExist != null) {
             throw new NameAlreadyExist(DomainConstants.NAME_ALREADY_EXIST);
         }
+        CategoryValidator.validateName(categoryModel.getName());
+        CategoryValidator.validateDescription(categoryModel.getDescription());
+        categoryModel.setName(categoryModel.getName().toLowerCase());
+        categoryModel.setDescription(categoryModel.getDescription().toLowerCase());
         categoryPersistencePort.saveCategory(categoryModel);
     }
 
@@ -46,8 +47,14 @@ public class CategoryUseCase implements CategoryServicePort {
     }
 
     @Override
-    public PagedResult<CategoryModel> getCategoriesPaginated(PaginationRequest paginationRequest) {
-        return categoryPersistencePort.getCategoriesPaginated(paginationRequest);
+    public PagedResult<CategoryModel> getCategoriesPaginated(int page, int size, boolean orderAsc) {
+        if(page < DomainConstants.MIN_VALUE_PAGE) {
+            throw new PageMinNumbrePage(DomainConstants.PAGE_MIN_VALUE_PAGE);
+        }
+        if(size < DomainConstants.MIN_VALUE_SIZE) {
+            throw new PageMinNumbreSize(DomainConstants.PAGE_MIN_VALUE_SIZE);
+        }
+        return categoryPersistencePort.getCategoriesPaginated(page, size, orderAsc);
     }
 
 
