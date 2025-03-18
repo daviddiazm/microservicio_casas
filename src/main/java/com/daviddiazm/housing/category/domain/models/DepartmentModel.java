@@ -9,6 +9,9 @@ public class DepartmentModel {
     private String description;
     private List<MunicipalityModel> municipalities;
 
+    public DepartmentModel() {
+    }
+
     public DepartmentModel(Long id, String name, String description, List<MunicipalityModel> municipalities) {
         this.id = id;
         this.name = name;

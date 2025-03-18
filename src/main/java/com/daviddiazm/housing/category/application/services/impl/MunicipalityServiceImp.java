@@ -22,20 +22,28 @@ public class MunicipalityServiceImp implements MunicipalityService {
     private final MunicipalityServicePort municipalityServicePort;
     private final DepartmentPersistencePort departmentPersistencePort;
 
+
     @Override
     public SaveMunicipalityResponse saveMunicipality(SaveMunicipalityRequest saveMunicipalityRequest) {
-        System.out.println("service municipal impl");
-        System.out.println(saveMunicipalityRequest);
-        DepartmentModel departmet = departmentPersistencePort.getDepartmentById(saveMunicipalityRequest.departmentId());
-
-        municipalityServicePort.saveMunicipality(
-                new MunicipalityModel(
-                        null,
-                        saveMunicipalityRequest.name(),
-                        saveMunicipalityRequest.description(),
-                        departmet
-                )
-        );
+        municipalityServicePort.saveMunicipality(municipalityDtoMapper.
+                requestToModel(saveMunicipalityRequest));
         return new SaveMunicipalityResponse(MunicipalityConstants.SAVE_CORRECTLY_MESSAGE, LocalDateTime.now());
     }
+
+    //    @Override
+//    public SaveMunicipalityResponse saveMunicipality(SaveMunicipalityRequest saveMunicipalityRequest) {
+//        System.out.println("service municipal impl");
+//        System.out.println(saveMunicipalityRequest);
+//        DepartmentModel departmet = departmentPersistencePort.getDepartmentById(saveMunicipalityRequest.departmentId());
+//
+//        municipalityServicePort.saveMunicipality(
+//                new MunicipalityModel(
+//                        null,
+//                        saveMunicipalityRequest.name(),
+//                        saveMunicipalityRequest.description(),
+//                        departmet
+//                )
+//        );
+//        return new SaveMunicipalityResponse(MunicipalityConstants.SAVE_CORRECTLY_MESSAGE, LocalDateTime.now());
+//    }
 }

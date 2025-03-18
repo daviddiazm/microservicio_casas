@@ -7,10 +7,10 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = DepartmentEntityMapper.class)
+@Mapper(componentModel = "spring")
 public interface MunicipalityEntityMapper {
-    @Mapping(source = "departmentModel", target = "departmentEntity")
+    @Mapping(source = "departmentModel.id", target = "departmentEntity.id")
     MunicipalityEntity modelToEntity(MunicipalityModel municipalityModel);
 
-    List<MunicipalityModel> entityListToModelList(List<MunicipalityEntity> municipalityEntityList);
+
 }
