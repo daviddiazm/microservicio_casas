@@ -3,7 +3,6 @@ package com.daviddiazm.housing.category.infrastructure.adapters.persistence;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
-import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
 import com.daviddiazm.housing.category.infrastructure.entities.CategoryEntity;
 import com.daviddiazm.housing.category.infrastructure.mappers.CategoryEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.CategoryRepository;

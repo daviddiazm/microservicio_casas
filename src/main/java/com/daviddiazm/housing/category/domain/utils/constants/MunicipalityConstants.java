@@ -1,11 +1,8 @@
 package com.daviddiazm.housing.category.domain.utils.constants;
 
-public class DomainConstants {
-    private DomainConstants() {
-        throw new IllegalStateException("Utily class");
-    }
-
+public class MunicipalityConstants {
     public static final String FIELD_ORDER_PAGINATION = "name";
+    public static final String SAVE_CORRECTLY_MESSAGE = "The municipality saved correctly";
 
     public static final int MIN_NAME_CARACTER_LENGTH = 3;
     public static final int MAX_NAME_CARACTER_LENGTH = 50;
@@ -29,6 +26,5 @@ public class DomainConstants {
     public static final String PAGE_MIN_VALUE_SIZE = "The minimum size for size is '0'";
     public static final int MIN_VALUE_PAGE = 0;
     public static final int MIN_VALUE_SIZE = 1;
-
 
 }
