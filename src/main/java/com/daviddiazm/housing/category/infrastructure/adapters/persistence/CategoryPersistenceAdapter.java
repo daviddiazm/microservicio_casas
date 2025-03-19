@@ -37,7 +37,6 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
 
     @Override
     public List<CategoryModel> getCategoriesByName(String categoryName) {
-
         return categoryEntityMapper.entityListToModelList(categoryRepository.findByNameContaining(categoryName));
     }
 
@@ -51,7 +50,6 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
         }
         Page<CategoryEntity> categoryPage = categoryRepository.findAll(pagination);
         List<CategoryModel> cagories = categoryEntityMapper.entityListToModelList(categoryRepository.findAll(pagination).getContent());
-
         return new PagedResult<>(
                 cagories,
                 page,

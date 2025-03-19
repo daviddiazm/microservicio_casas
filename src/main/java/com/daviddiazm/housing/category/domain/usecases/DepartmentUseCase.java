@@ -21,7 +21,7 @@ public class DepartmentUseCase implements DepartmentServicePort {
         if (departmentExist != null) {
             throw new NameAlreadyExist(DepartmentConstants.DEPARTMENT_ALREADY_EXIST);
         }
-//        si se permiten caracteres pero no numeros
+
         DepartmentValidator.validateName(departmentModel.getName());
         DepartmentValidator.validateDescription(departmentModel.getDescription());
         departmentModel.setName(departmentModel.getName().toLowerCase());

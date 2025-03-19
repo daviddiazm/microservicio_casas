@@ -1,7 +1,5 @@
 package com.daviddiazm.housing.category.infrastructure.adapters.persistence;
-
 import com.daviddiazm.housing.category.domain.models.DepartmentModel;
-import com.daviddiazm.housing.category.domain.models.MunicipalityModel;
 import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePort;
 import com.daviddiazm.housing.category.infrastructure.entities.DepartmentEntity;
 import com.daviddiazm.housing.category.infrastructure.mappers.DepartmentEntityMapper;
@@ -10,8 +8,6 @@ import com.daviddiazm.housing.category.infrastructure.repositories.mysql.Departm
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 import java.util.Optional;
 
 

@@ -1,7 +1,7 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
 import com.daviddiazm.housing.category.domain.exceptions.*;
-import com.daviddiazm.housing.category.domain.models.CategoryFactory;
+import com.daviddiazm.housing.category.domain.utils.factories.CategoryFactory;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
 import org.junit.jupiter.api.Test;
