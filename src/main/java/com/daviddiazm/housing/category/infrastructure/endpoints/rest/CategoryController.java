@@ -23,8 +23,8 @@ import java.util.List;
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
 @Tag(
-        name = "Categorias",
-        description = "Se utilizan los siguientes endponints para crear y obtener las categorías"
+        name = "Categories",
+        description = "The following endpoints are used to create and retrieve categories"
 )
 public class CategoryController {
 
@@ -36,13 +36,13 @@ public class CategoryController {
     @PostMapping("/")
     @Operation(
             method = "POST",
-            summary = "Guardar categoria",
-            description = "Este endpont se utiliza para guardar las categorias",
-            tags = {"Categorias"},
+            summary = "Save category",
+            description = "Eset endpoint is used to save categories",
+            tags = {"Categories"},
             parameters = {
                     @Parameter(
                             name = "name",
-                            description = "el nombre de la categoria que desea añadir",
+                            description = "the name of the category you want to add",
                             example = "condominio"
                     ),
                     @Parameter(
@@ -52,7 +52,7 @@ public class CategoryController {
                     ),
             },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Se ingresa dos datos de tipo texto",
+                    description = "Two text type data are entered",
                     required = true,
                     content = @Content(
                             mediaType = "application/json",
@@ -62,7 +62,7 @@ public class CategoryController {
             responses = {
                     @ApiResponse(
                             responseCode = "201",
-                            description = "Se logro guardar la categoria en la base de datos",
+                            description = "The category was successfully saved in the database.",
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema( implementation = SaveCategoryResponse.class)
@@ -70,7 +70,7 @@ public class CategoryController {
                     ),
                     @ApiResponse(
                             responseCode = "400",
-                            description = "Se ingresaron los datos de manera incorrecta",
+                            description = "Data was entered incorrectly",
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema( implementation = ExceptionResponse.class)
@@ -78,7 +78,7 @@ public class CategoryController {
                     ),
                     @ApiResponse(
                             responseCode = "409",
-                            description = "Ingreso una categoria que ya existe",
+                            description = "I enter a category that already exists",
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema( implementation = ExceptionResponse.class)
@@ -95,30 +95,30 @@ public class CategoryController {
     @GetMapping("/")
     @Operation(
             method = "GET",
-            summary = "Obtener una lista de categorias paginadas",
-            description = "Este endpont se utiliza para mostrar las categorias paginadas",
-            tags = {"Categorias"},
+            summary = "Get a list of paginated categories",
+            description = "Eset endpoint is used to display paginated categories",
+            tags = {"Categories"},
             parameters = {
                     @Parameter(
                             name = "page",
-                            description = "La pagina en la que quiere estar ubicado",
+                            description = "The page you want to be located on",
                             example = "1"
                     ),
                     @Parameter(
                             name = "size",
-                            description = "La cantidad de categorias que quiere ver en una pagina",
+                            description = "The number of categories you want to see on a page",
                             example = "50"
                     ),
                     @Parameter(
                             name = "orderAsc",
-                            description = "Este parametro cumple la funcion de traer las categorias ordenadas de manera alfabetica con respecto a su nombre",
+                            description = "This parameter serves the function of bringing the categories ordered alphabetically with respect to their name",
                             example = "true"
                     )
             },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Se logro obtener las categorias paginadas en la base de datos",
+                            description = "The paginated categories were obtained in the database.",
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema( implementation = PagedResultResponse.class)
@@ -126,7 +126,7 @@ public class CategoryController {
                     ),
                     @ApiResponse(
                             responseCode = "400",
-                            description = "Se ingresaron los datos de manera incorrecta",
+                            description = "Data was entered incorrectly",
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema( implementation = ExceptionResponse.class)

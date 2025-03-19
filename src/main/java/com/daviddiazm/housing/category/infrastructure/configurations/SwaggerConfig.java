@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Microservicio ubicaciones y categorías",
-                description = "Es un microservicio con el que se administra las categorías que los inmuebles pueden ocupar y las ubicaciones que comprende desde el departamento hasta el municipio",
+                title = "Microservice locations and categories",
+                description = "It is a microservice that manages the categories that properties can occupy and the locations that it includes, from the department to the municipality.",
                 contact = @Contact(
                         name = "David Diaz Montengro",
                         url = "https://daviddiazm.github.io/",
@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         ),
         servers = {
                 @Server(
-                        description = "Server para desarrollo local",
+                        description = "Server for local development",
                         url = "http://localhost:8081"
                 )
         }

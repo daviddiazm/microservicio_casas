@@ -36,16 +36,7 @@ public class DepartmentPersistenceAdapter implements DepartmentPersistencePort {
 
     @Override
     public DepartmentModel getDepartmentById(Long id) {
-//        Optional<DepartmentEntity> department = departmentRespository.findById(id);
-//        if(department.isPresent()) {
-//            List<MunicipalityModel> municipalities = municipalityEntityMapper.entityListToModelList(department.get().getMunicipalities());
-//            return new DepartmentModel(
-//                    department.get().getId(),
-//                    department.get().getName(),
-//                    department.get().getDescription(),
-//                    municipalities
-//            );
-//        }
-        return null;
+        Optional<DepartmentEntity> department = departmentRespository.findById(id);
+        return departmentEntityMapper.entityToModel(department.orElseThrow());
     }
 }

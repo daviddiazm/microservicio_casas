@@ -17,8 +17,6 @@ public class MunicipalityPersistenceAdapter implements MunicipalityPersistencePo
 
     @Override
     public void saveMunicipality(MunicipalityModel municipalityModel) {
-        System.out.println("municpal persistence adapter");
-        System.out.println(municipalityModel);
         municipalityRepository.save(municipalityEntityMapper.modelToEntity(municipalityModel));
     }
 }

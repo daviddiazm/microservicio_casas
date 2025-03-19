@@ -19,8 +19,9 @@ public class MunicipalityConstants {
     public static final String DESCRIPTION_MIN_LENGHT = "The min length for description needs most to be 10 caracters";
     public static final String DESCRIPTION_MAX_LENGHT = "The max length for description needs most to be 90 caracters";
 
-    public static final String NAME_ALREADY_EXIST = "The name is already exist";
+    public static final String NAME_ALREADY_EXIST = "The municipality name is already exist";
     public static final String CATEGORY_NO_EXIST = "The category not exist";
+    public static final String DEPARTMENT_MUNICIPALITY_NOT_EXIST = "The department id not exist";
 
     public static final String PAGE_MIN_VALUE_PAGE = "The minimum size for page is '0' ";
     public static final String PAGE_MIN_VALUE_SIZE = "The minimum size for size is '0'";
