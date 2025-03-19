@@ -17,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
@@ -143,10 +141,4 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.getCategoriesPaginated(page, size, orderAsc));
     }
 
-
-    @GetMapping("/by-name/{categoryName}")
-    @Operation(deprecated = true)
-    public ResponseEntity<List<CategoryResponse>> getCategoriesByName (@PathVariable String categoryName) {
-        return ResponseEntity.ok().body(categoryService.getCategotiesByName(categoryName));
-    }
 }
