@@ -111,21 +111,15 @@ class CategoryUseCaseTest {
         verify(categoryPersistencePort).getCategoriesByName(validName);
     }
 
-//    arreglar esto
-//    @Test
-//    void getCategoriesPaginated_DelegatesToPersistencePort() {
-//        CategoryModel category = CategoryFactory.createCategory();
-//        String name = "casa duplex";
-//        String description = "es una casa duplex";
-//        CategoryModel category2 = CategoryFactory.createCategory(2L, name, description);
-//        PaginationRequest request = new PaginationRequest(0, 10, true);
-//        List<CategoryModel> expectedList = List.of(category, category2);
-//
-//        when(categoryPersistencePort.getCategoriesPaginated(request)).thenReturn(expectedList);
-//
-//        List<CategoryModel> result = categoryUseCase.getCategoriesPaginated(request);
-//
-//        assertEquals(expectedList, result);
-//        verify(categoryPersistencePort).getCategoriesPaginated(request);
-//    }
+    @Test
+    void pageValueIsSmallderThatCero_Expect_PageMinNumbrePage () {
+        int value = -1;
+        assertThrows(PageMinNumbrePage.class , ()-> categoryUseCase.getCategoriesPaginated(value,1,true));
+    }
+
+    @Test
+    void sizeValueIsSmallderThatOne_Expect_PageMinNumbreSize () {
+        int size = -1;
+        assertThrows(PageMinNumbreSize.class , ()-> categoryUseCase.getCategoriesPaginated(0,size,true));
+    }
 }

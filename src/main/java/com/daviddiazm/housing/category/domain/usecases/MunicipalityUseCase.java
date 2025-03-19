@@ -26,11 +26,17 @@ public class MunicipalityUseCase implements MunicipalityServicePort {
     @Override
     public void saveMunicipality(MunicipalityModel municipalityModel) {
         DepartmentModel department = departmentPersistencePort.getDepartmentById(municipalityModel.getDepartmentModel().getId());
+        MunicipalityModel municipalityExist;
 
         municipalityModel.setName(municipalityModel.getName().toLowerCase());
         municipalityModel.setDescription(municipalityModel.getDescription().toLowerCase());
 
-        MunicipalityModel municipalityExist = getMunicipalityModel(municipalityModel.getName(), department);
+        if(department == null) {
+            throw new DepartmentIdNotExist(MunicipalityConstants.DEPARTMENT_MUNICIPALITY_NOT_EXIST);
+        } else {
+            municipalityExist = getMunicipalityModel(municipalityModel.getName(), department);
+        }
+
         if(municipalityExist != null) {
             throw new NameAlreadyExist(MunicipalityConstants.NAME_ALREADY_EXIST);
         }
@@ -40,16 +46,11 @@ public class MunicipalityUseCase implements MunicipalityServicePort {
 
     private static MunicipalityModel getMunicipalityModel(String nameMunicipality, DepartmentModel department) {
         MunicipalityModel municipalityExist = null;
-
-        if(department == null) {
-            throw new DepartmentIdNotExist(MunicipalityConstants.DEPARTMENT_MUNICIPALITY_NOT_EXIST);
-        } else {
-            List<MunicipalityModel> municipalities = department.getMunicipalities();
-            if(!municipalities.isEmpty()) {
-                for(MunicipalityModel municipality : municipalities) {
-                    if(municipality.getName().equals(nameMunicipality)) {
-                        municipalityExist = municipality;
-                    }
+        List<MunicipalityModel> municipalities = department.getMunicipalities();
+        if(!municipalities.isEmpty()) {
+            for(MunicipalityModel municipality : municipalities) {
+                if(municipality.getName().equals(nameMunicipality)) {
+                    municipalityExist = municipality;
                 }
             }
         }
