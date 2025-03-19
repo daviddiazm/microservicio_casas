@@ -3,7 +3,6 @@ package com.daviddiazm.housing.category.infrastructure.adapters.persistence;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
 import com.daviddiazm.housing.category.domain.models.CategoryModel;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
-import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
 import com.daviddiazm.housing.category.infrastructure.entities.CategoryEntity;
 import com.daviddiazm.housing.category.infrastructure.mappers.CategoryEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.CategoryRepository;
@@ -38,7 +37,6 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
 
     @Override
     public List<CategoryModel> getCategoriesByName(String categoryName) {
-
         return categoryEntityMapper.entityListToModelList(categoryRepository.findByNameContaining(categoryName));
     }
 
@@ -52,7 +50,6 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
         }
         Page<CategoryEntity> categoryPage = categoryRepository.findAll(pagination);
         List<CategoryModel> cagories = categoryEntityMapper.entityListToModelList(categoryRepository.findAll(pagination).getContent());
-
         return new PagedResult<>(
                 cagories,
                 page,

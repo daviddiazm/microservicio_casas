@@ -1,4 +1,6 @@
-package com.daviddiazm.housing.category.domain.models;
+package com.daviddiazm.housing.category.domain.utils.factories;
+
+import com.daviddiazm.housing.category.domain.models.CategoryModel;
 
 public class CategoryFactory {
 

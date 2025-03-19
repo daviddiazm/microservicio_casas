@@ -1,5 +1,6 @@
 package com.daviddiazm.housing.category.domain.models;
 
+import com.daviddiazm.housing.category.domain.utils.factories.CategoryFactory;
 import org.junit.jupiter.api.Test;
 
 

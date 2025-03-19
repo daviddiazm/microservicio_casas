@@ -1,17 +1,15 @@
 package com.daviddiazm.housing.category.domain.utils.constants;
 
-public class DomainConstants {
-    private DomainConstants() {
-        throw new IllegalStateException("Utily class");
-    }
-
+public class DepartmentConstants {
     public static final String FIELD_ORDER_PAGINATION = "name";
+    public static final String SAVE_CORRECTLY_MESSAGE = "The department saved correctly";
+
 
     public static final int MIN_NAME_CARACTER_LENGTH = 3;
     public static final int MAX_NAME_CARACTER_LENGTH = 50;
 
     public static final int MIN_DESCRIPTION_CARACTER_LENGTH = 10;
-    public static final int MAX_DESCRIPTION_CARACTER_LENGTH = 90;
+    public static final int MAX_DESCRIPTION_CARACTER_LENGTH = 120;
 
     public static final String FIELD_NAME_NULL_MESSAGE = "Field 'name' can not be null";
     public static final String FIELD_DESCRIPTION_NULL_MESSAGE = "Field 'description' can not be null";
@@ -30,5 +28,5 @@ public class DomainConstants {
     public static final int MIN_VALUE_PAGE = 0;
     public static final int MIN_VALUE_SIZE = 1;
 
-
+    public static final String DEPARTMENT_ALREADY_EXIST = "There is aready a department with this name";
 }
