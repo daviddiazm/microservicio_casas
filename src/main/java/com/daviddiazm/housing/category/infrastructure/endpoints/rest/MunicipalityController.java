@@ -1,8 +1,6 @@
 package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 
-import com.daviddiazm.housing.category.application.dtos.requests.SaveDepartmentRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveMunicipalityRequest;
-import com.daviddiazm.housing.category.application.dtos.responses.SaveDepartmentResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveMunicipalityResponse;
 import com.daviddiazm.housing.category.application.services.MunicipalityService;
 import com.daviddiazm.housing.category.infrastructure.exceptionshandler.ExceptionResponse;
@@ -16,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,11 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MunicipalityController {
 
     private final MunicipalityService municipalityService;
+
     @Operation(
             method = "POST",
             summary = "Save municipality",
             description = "this endpoint is used to save municipality",
-            tags = {"Location"},
             parameters = {
                     @Parameter(
                             name = "name",
@@ -65,7 +64,7 @@ public class MunicipalityController {
                             description = "The municipality was successfully saved in the database.",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema( implementation = SaveDepartmentResponse.class)
+                                    schema = @Schema( implementation = SaveMunicipalityResponse.class)
                             )
                     ),
                     @ApiResponse(
@@ -88,7 +87,7 @@ public class MunicipalityController {
 
     )
     @PostMapping("/")
-    ResponseEntity<SaveMunicipalityResponse> saveMunicipalityController(SaveMunicipalityRequest request){
+    ResponseEntity<SaveMunicipalityResponse> saveMunicipalityController( @RequestBody SaveMunicipalityRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(municipalityService.saveMunicipality(request));
     }
 }

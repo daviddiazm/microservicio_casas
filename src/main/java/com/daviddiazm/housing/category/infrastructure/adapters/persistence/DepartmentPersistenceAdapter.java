@@ -1,15 +1,15 @@
 package com.daviddiazm.housing.category.infrastructure.adapters.persistence;
+
 import com.daviddiazm.housing.category.domain.models.DepartmentModel;
 import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePort;
 import com.daviddiazm.housing.category.infrastructure.entities.DepartmentEntity;
 import com.daviddiazm.housing.category.infrastructure.mappers.DepartmentEntityMapper;
-import com.daviddiazm.housing.category.infrastructure.mappers.MunicipalityEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.DepartmentRespository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Optional;
 
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -18,7 +18,6 @@ public class DepartmentPersistenceAdapter implements DepartmentPersistencePort {
 
     private final DepartmentRespository departmentRespository;
     private final DepartmentEntityMapper departmentEntityMapper;
-    private final MunicipalityEntityMapper municipalityEntityMapper;
 
     @Override
     public void saveDepartment(DepartmentModel departmentModel) {

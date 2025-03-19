@@ -1,5 +1,5 @@
-package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 
+package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveDepartmentRequest;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveDepartmentResponse;
 import com.daviddiazm.housing.category.application.services.DepartmentService;
@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,19 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/departments")
 @RequiredArgsConstructor
 @Tag(
-        name = "Departments",
+        name = "location",
         description = "The following endpoints are used to create and retrieve departments"
 )
 public class DepartmentController {
+
 //    http://localhost:8081/swagger-ui/index.html
 
     private final DepartmentService departmentService;
-
     @Operation(
             method = "POST",
             summary = "Save department",
             description = "this endpoint is used to save department",
-            tags = {"Department"},
             parameters = {
                     @Parameter(
                             name = "name",
@@ -83,7 +83,8 @@ public class DepartmentController {
 
     )
     @PostMapping("/")
-    public ResponseEntity<SaveDepartmentResponse> saveDepartmentController(SaveDepartmentRequest request) {
+    public ResponseEntity<SaveDepartmentResponse> saveDepartmentController( @RequestBody SaveDepartmentRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.saveDepartment(request));
     }
+
 }

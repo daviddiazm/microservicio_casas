@@ -12,5 +12,4 @@ public interface DepartmentEntityMapper {
 
     @Mapping(source = "municipalities", target = "municipalities")
     DepartmentModel entityToModel(DepartmentEntity departmentEntity);
-
 }
