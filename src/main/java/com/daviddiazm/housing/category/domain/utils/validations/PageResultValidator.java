@@ -5,7 +5,7 @@ import com.daviddiazm.housing.category.domain.exceptions.PageMinNumbreSize;
 import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
 
 public class PageResultValidator {
-    public static void validatePage(int page){
+    public static void validatePage(int page) throws PageMinNumbrePage {
         if(page < DomainConstants.MIN_VALUE_PAGE) {
             throw new PageMinNumbrePage(DomainConstants.PAGE_MIN_VALUE_PAGE);
         }

@@ -10,6 +10,7 @@ import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePor
 import com.daviddiazm.housing.category.domain.ports.out.MunicipalityPersistencePort;
 import com.daviddiazm.housing.category.domain.utils.constants.MunicipalityConstants;
 import com.daviddiazm.housing.category.domain.utils.validations.MunicipalityValidator;
+import com.daviddiazm.housing.category.domain.utils.validations.PageResultValidator;
 
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class MunicipalityUseCase implements MunicipalityServicePort {
 
     @Override
     public PagedResult<MunicipalityModel> getMunicipalitiesPaginated(int page, int size, boolean orderAsc, String name) {
+        PageResultValidator.validatePage(page);
+        PageResultValidator.validateSize(size);
         return municipalityPersistencePort.getMunicipalitiesPaginated(page, size, orderAsc, name);
     }
 
