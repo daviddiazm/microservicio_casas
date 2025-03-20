@@ -44,8 +44,8 @@ public class MunicipalityUseCase implements MunicipalityServicePort {
     }
 
     @Override
-    public PagedResult<MunicipalityModel> getPageMunicipalities(int page, int size, boolean orderAsc) {
-        return null;
+    public PagedResult<MunicipalityModel> getMunicipalitiesPaginated(int page, int size, boolean orderAsc, String name) {
+        return municipalityPersistencePort.getMunicipalitiesPaginated(page, size, orderAsc, name);
     }
 
     private static MunicipalityModel getMunicipalityModel(String nameMunicipality, DepartmentModel department) {
