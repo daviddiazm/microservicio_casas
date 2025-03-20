@@ -91,13 +91,55 @@ public class MunicipalityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(municipalityService.saveMunicipality(request));
     }
 
+    @Operation(
+            method = "GET",
+            summary = "get municipality paginated",
+            description = "this endpoint is used to get municipalities by name",
+            parameters = {
+                    @Parameter(
+                            name = "page",
+                            description = "The page you want to be located on",
+                            example = "1"
+                    ),
+                    @Parameter(
+                            name = "size",
+                            description = "The number of categories you want to see on a page",
+                            example = "50"
+                    ),
+                    @Parameter(
+                            name = "orderAsc",
+                            description = "This parameter serves the function of bringing the categories ordered alphabetically with respect to their name",
+                            example = "true"
+                    ),
+                    @Parameter(
+                            name = "name",
+                            description = "The city name or department name that you want",
+                            example = "cauca"
+                    )
+            },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "The paginated categories were obtained in the database.",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = PagedResultResponse.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Data was entered incorrectly",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = ExceptionResponse.class)
+                            )
+                    )
+            }
+    )
     @GetMapping("/")
     ResponseEntity<PagedResultResponse<MunicipalityModel>> getMunicipalitiesPaginated (
-            @RequestParam int page,
-            @RequestParam int size,
-            @RequestParam boolean orderAsc,
-            @RequestParam String name
-    ) {
+                                    @RequestParam int page, @RequestParam int size,
+                                    @RequestParam boolean orderAsc, @RequestParam String name) {
         GetMunicipalitiesPagedRequest request = new GetMunicipalitiesPagedRequest(page,size,orderAsc,name);
         return ResponseEntity.ok().body(municipalityService.getMunicipalitiesPaginated(request));
     }
