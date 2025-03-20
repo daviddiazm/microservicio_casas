@@ -7,17 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface MunicipalityRepository extends JpaRepository<MunicipalityEntity, Long> {
 
+public interface MunicipalityRepository extends JpaRepository<MunicipalityEntity, Long> {
     @Query(
             value = """
-                    SELECT municipality.name, department.name
-                    FROM  municipality
-                    JOIN  departments ON municipality.department_id
-                    WHERE municipality.name LIKE %:name%
-                    OR    department.name LIKE %:name%
+                    SELECT municipality.id AS id, municipality.name, municipality.description, municipality.department_id, department.id AS id_department, department.name AS name_department, department.description AS description_department
+                    FROM municipality,department
+                    WHERE municipality.department_id = department.id AND (municipality.name LIKE %:value% OR department.name LIKE %:value%)
                     """,
             nativeQuery = true
     )
-    Page<MunicipalityEntity> findMunicipalities (@Param("name") String name, Pageable pageable);
+    Page<MunicipalityEntity> findMunicipalities(@Param("value") String name, Pageable pageable);
 }

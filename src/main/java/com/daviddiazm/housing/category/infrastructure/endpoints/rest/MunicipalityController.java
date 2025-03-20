@@ -1,8 +1,11 @@
 package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 
+import com.daviddiazm.housing.category.application.dtos.requests.GetMunicipalitiesPagedRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveMunicipalityRequest;
+import com.daviddiazm.housing.category.application.dtos.responses.PagedResultResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveMunicipalityResponse;
 import com.daviddiazm.housing.category.application.services.MunicipalityService;
+import com.daviddiazm.housing.category.domain.models.MunicipalityModel;
 import com.daviddiazm.housing.category.infrastructure.exceptionshandler.ExceptionResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -88,6 +91,14 @@ public class MunicipalityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(municipalityService.saveMunicipality(request));
     }
 
-//    @GetMapping("/")
-//    ResponseEntity<>
+    @GetMapping("/")
+    ResponseEntity<PagedResultResponse<MunicipalityModel>> getMunicipalitiesPaginated (
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam boolean orderAsc,
+            @RequestParam String name
+    ) {
+        GetMunicipalitiesPagedRequest request = new GetMunicipalitiesPagedRequest(page,size,orderAsc,name);
+        return ResponseEntity.ok().body(municipalityService.getMunicipalitiesPaginated(request));
+    }
 }

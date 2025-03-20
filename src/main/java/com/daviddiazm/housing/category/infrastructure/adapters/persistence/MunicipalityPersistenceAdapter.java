@@ -39,6 +39,7 @@ public class MunicipalityPersistenceAdapter implements MunicipalityPersistencePo
         }
         Page<MunicipalityEntity> municpalityPage = municipalityRepository.findMunicipalities(name, pagination);
         List<MunicipalityModel> municipalities = municipalityEntityMapper.entityListToModelList(municpalityPage.getContent());
+
         return new PagedResult<>(
                 municipalities,
                 page,
