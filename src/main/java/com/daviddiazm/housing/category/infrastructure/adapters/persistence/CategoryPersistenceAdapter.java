@@ -58,8 +58,5 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
                 categoryPage.getTotalElements(),
                 categoryPage.getTotalPages()
         );
-
     }
-
-
 }

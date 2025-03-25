@@ -100,12 +100,12 @@ public class CategoryController {
                     @Parameter(
                             name = "page",
                             description = "The page you want to be located on",
-                            example = "1"
+                            example = "0"
                     ),
                     @Parameter(
                             name = "size",
                             description = "The number of categories you want to see on a page",
-                            example = "50"
+                            example = "5"
                     ),
                     @Parameter(
                             name = "orderAsc",

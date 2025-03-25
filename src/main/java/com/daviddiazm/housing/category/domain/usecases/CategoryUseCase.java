@@ -7,6 +7,7 @@ import com.daviddiazm.housing.category.domain.ports.in.CategoryServicePort;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
 import com.daviddiazm.housing.category.domain.utils.constants.DomainConstants;
 import com.daviddiazm.housing.category.domain.utils.validations.CategoryValidator;
+import com.daviddiazm.housing.category.domain.utils.validations.PageResultValidator;
 
 import java.util.List;
 
@@ -48,12 +49,8 @@ public class CategoryUseCase implements CategoryServicePort {
 
     @Override
     public PagedResult<CategoryModel> getCategoriesPaginated(int page, int size, boolean orderAsc) {
-        if(page < DomainConstants.MIN_VALUE_PAGE) {
-            throw new PageMinNumbrePage(DomainConstants.PAGE_MIN_VALUE_PAGE);
-        }
-        if(size < DomainConstants.MIN_VALUE_SIZE) {
-            throw new PageMinNumbreSize(DomainConstants.PAGE_MIN_VALUE_SIZE);
-        }
+        PageResultValidator.validatePage(page);
+        PageResultValidator.validateSize(size);
         return categoryPersistencePort.getCategoriesPaginated(page, size, orderAsc);
     }
 

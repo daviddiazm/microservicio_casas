@@ -18,7 +18,7 @@ public class MunicipalityEntity {
     private String description;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private DepartmentEntity departmentEntity;
 }
