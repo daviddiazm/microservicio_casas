@@ -6,9 +6,9 @@ spring:
   application:
     name: housing
   datasource:
-    url: jdbc:mysql://localhost/bootcamp2025_s1
+    url: jdbc:mysql://localhost/db_stock
     username: root
-    password:
+    password: ""
   jpa:
     hibernate:
       ddl-auto: update
