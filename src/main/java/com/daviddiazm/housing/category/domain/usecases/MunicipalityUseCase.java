@@ -1,7 +1,7 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
-import com.daviddiazm.housing.category.domain.exceptions.DepartmentIdNotExist;
-import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExist;
+import com.daviddiazm.housing.category.domain.exceptions.DepartmentIdNotExistException;
+import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExistException;
 import com.daviddiazm.housing.category.domain.models.DepartmentModel;
 import com.daviddiazm.housing.category.domain.models.MunicipalityModel;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
@@ -38,7 +38,7 @@ public class MunicipalityUseCase implements MunicipalityServicePort {
 
         MunicipalityModel municipalityExist = getMunicipalityModel(municipalityModel.getName(), department);
         if(municipalityExist != null) {
-            throw new NameAlreadyExist(MunicipalityConstants.NAME_ALREADY_EXIST);
+            throw new NameAlreadyExistException(MunicipalityConstants.NAME_ALREADY_EXIST);
         }
 
         municipalityPersistencePort.saveMunicipality(municipalityModel);
@@ -48,14 +48,15 @@ public class MunicipalityUseCase implements MunicipalityServicePort {
     public PagedResult<MunicipalityModel> getMunicipalitiesPaginated(int page, int size, boolean orderAsc, String name) {
         PageResultValidator.validatePage(page);
         PageResultValidator.validateSize(size);
-        return municipalityPersistencePort.getMunicipalitiesPaginated(page, size, orderAsc, name);
+        String lowerName = name.toLowerCase();
+        return municipalityPersistencePort.getMunicipalitiesPaginated(page, size, orderAsc, lowerName);
     }
 
     private static MunicipalityModel getMunicipalityModel(String nameMunicipality, DepartmentModel department) {
         MunicipalityModel municipalityExist = null;
 
         if(department == null) {
-            throw new DepartmentIdNotExist(MunicipalityConstants.DEPARTMENT_MUNICIPALITY_NOT_EXIST);
+            throw new DepartmentIdNotExistException(MunicipalityConstants.DEPARTMENT_MUNICIPALITY_NOT_EXIST);
         } else {
             List<MunicipalityModel> municipalities = department.getMunicipalities();
             if(!municipalities.isEmpty()) {

@@ -2,21 +2,27 @@ package com.daviddiazm.housing.commons.configurations.beans;
 
 import com.daviddiazm.housing.category.domain.ports.in.CategoryServicePort;
 import com.daviddiazm.housing.category.domain.ports.in.DepartmentServicePort;
+import com.daviddiazm.housing.category.domain.ports.in.LocationServicePort;
 import com.daviddiazm.housing.category.domain.ports.in.MunicipalityServicePort;
 import com.daviddiazm.housing.category.domain.ports.out.CategoryPersistencePort;
 import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePort;
+import com.daviddiazm.housing.category.domain.ports.out.LocationPersistencePort;
 import com.daviddiazm.housing.category.domain.ports.out.MunicipalityPersistencePort;
 import com.daviddiazm.housing.category.domain.usecases.CategoryUseCase;
 import com.daviddiazm.housing.category.domain.usecases.DepartmentUseCase;
+import com.daviddiazm.housing.category.domain.usecases.LocationUseCase;
 import com.daviddiazm.housing.category.domain.usecases.MunicipalityUseCase;
 import com.daviddiazm.housing.category.infrastructure.adapters.persistence.CategoryPersistenceAdapter;
 import com.daviddiazm.housing.category.infrastructure.adapters.persistence.DepartmentPersistenceAdapter;
+import com.daviddiazm.housing.category.infrastructure.adapters.persistence.LocationPersistenceAdapter;
 import com.daviddiazm.housing.category.infrastructure.adapters.persistence.MunicipalityPersistenceAdapter;
 import com.daviddiazm.housing.category.infrastructure.mappers.CategoryEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.mappers.DepartmentEntityMapper;
+import com.daviddiazm.housing.category.infrastructure.mappers.LocationEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.mappers.MunicipalityEntityMapper;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.CategoryRepository;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.DepartmentRespository;
+import com.daviddiazm.housing.category.infrastructure.repositories.mysql.LocationRepository;
 import com.daviddiazm.housing.category.infrastructure.repositories.mysql.MunicipalityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +39,9 @@ public class BeanConfiguration {
 
     private final MunicipalityRepository municipalityRepository;
     private final MunicipalityEntityMapper municipalityEntityMapper;
+
+    private final LocationRepository locationRepository;
+    private final LocationEntityMapper locationEntityMapper;
 
     @Bean
     public CategoryServicePort categoryServicePort() {
@@ -66,4 +75,14 @@ public class BeanConfiguration {
         return new MunicipalityPersistenceAdapter(municipalityRepository, municipalityEntityMapper);
     }
 
+
+    @Bean
+    public LocationServicePort locationServicePort () {
+        return new LocationUseCase(locationPersistencePort(), municipalityPersistencePort());
+    }
+
+    @Bean
+    public LocationPersistencePort locationPersistencePort() {
+        return  new LocationPersistenceAdapter(locationRepository, locationEntityMapper);
+    }
 }

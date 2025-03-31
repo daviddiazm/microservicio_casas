@@ -1,6 +1,6 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
-import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExist;
+import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExistException;
 import com.daviddiazm.housing.category.domain.models.DepartmentModel;
 import com.daviddiazm.housing.category.domain.ports.in.DepartmentServicePort;
 import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePort;
@@ -19,7 +19,7 @@ public class DepartmentUseCase implements DepartmentServicePort {
     public void saveDepartment(DepartmentModel departmentModel) {
         DepartmentModel departmentExist = departmentPersistencePort.getDepartmentByName(departmentModel.getName());
         if (departmentExist != null) {
-            throw new NameAlreadyExist(DepartmentConstants.DEPARTMENT_ALREADY_EXIST);
+            throw new NameAlreadyExistException(DepartmentConstants.DEPARTMENT_ALREADY_EXIST);
         }
 
         DepartmentValidator.validateName(departmentModel.getName());

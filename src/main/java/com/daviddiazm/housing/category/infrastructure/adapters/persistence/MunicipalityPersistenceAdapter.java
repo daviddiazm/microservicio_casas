@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -48,5 +49,17 @@ public class MunicipalityPersistenceAdapter implements MunicipalityPersistencePo
                 municpalityPage.getTotalElements(),
                 municpalityPage.getTotalPages()
         );
+    }
+
+    @Override
+    public MunicipalityModel findById(Long id) {
+        Optional<MunicipalityEntity> municipalityResponse = municipalityRepository.findById(id);
+        if (municipalityResponse.isEmpty()) {
+            return null;
+        }
+        MunicipalityEntity municipalityEntity = municipalityResponse.get();
+
+        MunicipalityModel municipalityModel = new MunicipalityModel(municipalityEntity.getId(),municipalityEntity.getName(), municipalityEntity.getDescription(), null, null);
+        return municipalityModel;
     }
 }

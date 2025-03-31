@@ -36,7 +36,7 @@ class CategoryUseCaseTest {
         CategoryModel newCategory = CategoryFactory.createCategory();
         newCategory.setName(categoryName);
 
-        assertThrows(NameAlreadyExist.class, () -> categoryUseCase.saveCategory(newCategory));
+        assertThrows(NameAlreadyExistException.class, () -> categoryUseCase.saveCategory(newCategory));
 
     }
 
@@ -58,7 +58,7 @@ class CategoryUseCaseTest {
 
         when(categoryPersistencePort.getCategoryByName(categoryName)).thenReturn(category);
 
-        assertThrows(NameAlreadyExist.class, () -> categoryUseCase.saveCategory(category));
+        assertThrows(NameAlreadyExistException.class, () -> categoryUseCase.saveCategory(category));
 
     }
 
@@ -67,7 +67,7 @@ class CategoryUseCaseTest {
         String categoryName = "casa";
         when(categoryPersistencePort.getCategoriesByName(categoryName)).thenReturn(List.of());
 
-        assertThrows(CategoryNotExist.class, () -> categoryUseCase.getCategoriesByName(categoryName));
+        assertThrows(CategoryNotExistException.class, () -> categoryUseCase.getCategoriesByName(categoryName));
     }
 
     @Test

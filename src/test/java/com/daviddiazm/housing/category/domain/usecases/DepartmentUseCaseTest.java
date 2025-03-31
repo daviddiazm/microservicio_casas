@@ -1,6 +1,6 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
-import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExist;
+import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExistException;
 import com.daviddiazm.housing.category.domain.models.DepartmentModel;
 import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePort;
 import com.daviddiazm.housing.category.domain.utils.factories.DepartmentFactory;
@@ -40,7 +40,7 @@ class DepartmentUseCaseTest {
         DepartmentModel departmentExist = DepartmentFactory.createDepartment(id,name,description);
 
         when(departmentPersistencePort.getDepartmentByName(departmentModel.getName())).thenReturn(departmentExist);
-        assertThrows(NameAlreadyExist.class, () -> departmentUseCase.saveDepartment(departmentModel));
+        assertThrows(NameAlreadyExistException.class, () -> departmentUseCase.saveDepartment(departmentModel));
     }
 
     @Test

@@ -7,6 +7,7 @@ import com.daviddiazm.housing.category.domain.exceptions.NameMinException;
 import com.daviddiazm.housing.category.domain.utils.constants.MunicipalityConstants;
 
 public class MunicipalityValidator {
+
     public static void validateName(String name) {
         if (name == null) {
             throw new IllegalArgumentException(MunicipalityConstants.FIELD_NAME_NULL_MESSAGE);

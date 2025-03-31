@@ -23,7 +23,7 @@ public class CategoryUseCase implements CategoryServicePort {
     public void saveCategory(CategoryModel categoryModel) {
         CategoryModel categoryExist = categoryPersistencePort.getCategoryByName(categoryModel.getName());
         if(categoryExist != null) {
-            throw new NameAlreadyExist(DomainConstants.NAME_ALREADY_EXIST);
+            throw new NameAlreadyExistException(DomainConstants.NAME_ALREADY_EXIST);
         }
         CategoryValidator.validateName(categoryModel.getName());
         CategoryValidator.validateDescription(categoryModel.getDescription());
@@ -36,7 +36,7 @@ public class CategoryUseCase implements CategoryServicePort {
     public List<CategoryModel> getCategoriesByName(String name) {
         List<CategoryModel> listCategories = categoryPersistencePort.getCategoriesByName(name);
         if(listCategories.isEmpty()) {
-          throw new CategoryNotExist(DomainConstants.CATEGORY_NO_EXIST);
+          throw new CategoryNotExistException(DomainConstants.CATEGORY_NO_EXIST);
         }
         if(name.length() < DomainConstants.MIN_NAME_CARACTER_LENGTH) {
             throw new DescriptionMinException(DomainConstants.DESCRIPTION_MIN_LENGHT);

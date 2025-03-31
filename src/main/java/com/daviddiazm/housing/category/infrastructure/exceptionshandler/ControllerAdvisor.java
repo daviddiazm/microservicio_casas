@@ -15,8 +15,8 @@ public class ControllerAdvisor {
 
 
 
-    @ExceptionHandler(CategoryNotExist.class)
-    public ResponseEntity<ExceptionResponse> handleCategoryNoExistExceededException(CategoryNotExist exception) {
+    @ExceptionHandler(CategoryNotExistException.class)
+    public ResponseEntity<ExceptionResponse> handleCategoryNoExistExceededException(CategoryNotExistException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(DomainConstants.CATEGORY_NO_EXIST, LocalDateTime.now()));
     }
 
@@ -30,8 +30,8 @@ public class ControllerAdvisor {
         return ResponseEntity.badRequest().body(new ExceptionResponse(DomainConstants.DESCRIPTION_MIN_LENGHT, LocalDateTime.now()));
     }
 
-    @ExceptionHandler(NameAlreadyExist.class)
-    public ResponseEntity<ExceptionResponse> handleNameAlreadyExistExceededException(NameAlreadyExist exception) {
+    @ExceptionHandler(NameAlreadyExistException.class)
+    public ResponseEntity<ExceptionResponse> handleNameAlreadyExistExceededException(NameAlreadyExistException exception) {
         return ResponseEntity.status(409).body(new ExceptionResponse(DomainConstants.NAME_ALREADY_EXIST, LocalDateTime.now()));
     }
 
@@ -45,13 +45,13 @@ public class ControllerAdvisor {
         return ResponseEntity.badRequest().body(new ExceptionResponse(DomainConstants.NAME_MIN_LENGHT, LocalDateTime.now()));
     }
 
-    @ExceptionHandler(PageMinNumbrePage.class)
-    public ResponseEntity<ExceptionResponse> handlePageMintExceededException(PageMinNumbrePage exception) {
+    @ExceptionHandler(PageMinNumbrePageException.class)
+    public ResponseEntity<ExceptionResponse> handlePageMintExceededException(PageMinNumbrePageException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(DomainConstants.PAGE_MIN_VALUE_PAGE, LocalDateTime.now()));
     }
 
-    @ExceptionHandler(PageMinNumbreSize.class)
-    public ResponseEntity<ExceptionResponse> handlePageSizeMintExceededException(PageMinNumbreSize exception) {
+    @ExceptionHandler(PageMinNumbreSizeException.class)
+    public ResponseEntity<ExceptionResponse> handlePageSizeMintExceededException(PageMinNumbreSizeException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(DomainConstants.PAGE_MIN_VALUE_SIZE, LocalDateTime.now()));
     }
 
