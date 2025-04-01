@@ -6,4 +6,5 @@ import com.daviddiazm.housing.category.domain.models.PagedResult;
 public interface MunicipalityPersistencePort {
     void saveMunicipality(MunicipalityModel municipalityModel);
     PagedResult<MunicipalityModel> getMunicipalitiesPaginated(int page, int size, boolean orderAsc, String name);
+    MunicipalityModel findById(Long id);
 }

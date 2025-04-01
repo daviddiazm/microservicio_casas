@@ -1,19 +1,23 @@
 package com.daviddiazm.housing.category.domain.models;
 
+import java.util.List;
+
 public class MunicipalityModel {
     private Long id;
     private String name;
     private String description;
     private DepartmentModel departmentModel;
+    private List<LocationModel> locations;
 
     public MunicipalityModel() {
     }
 
-    public MunicipalityModel(Long id, String name, String description, DepartmentModel departmentModel) {
+    public MunicipalityModel(Long id, String name, String description, DepartmentModel departmentModel, List<LocationModel> locations) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.departmentModel = departmentModel;
+        this.locations = locations;
     }
 
     public Long getId() {
@@ -48,13 +52,11 @@ public class MunicipalityModel {
         this.departmentModel = departmentModel;
     }
 
-    @Override
-    public String toString() {
-        return "MunicipalityModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", departmentModel=" + departmentModel +
-                '}';
+    public List<LocationModel> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<LocationModel> locations) {
+        this.locations = locations;
     }
 }

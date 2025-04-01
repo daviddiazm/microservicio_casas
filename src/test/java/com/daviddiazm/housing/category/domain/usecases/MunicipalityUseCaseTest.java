@@ -1,16 +1,15 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
-import com.daviddiazm.housing.category.domain.exceptions.DepartmentIdNotExist;
-import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExist;
-import com.daviddiazm.housing.category.domain.exceptions.PageMinNumbrePage;
-import com.daviddiazm.housing.category.domain.exceptions.PageMinNumbreSize;
+import com.daviddiazm.housing.category.domain.exceptions.DepartmentIdNotExistException;
+import com.daviddiazm.housing.category.domain.exceptions.NameAlreadyExistException;
+import com.daviddiazm.housing.category.domain.exceptions.PageMinNumbrePageException;
+import com.daviddiazm.housing.category.domain.exceptions.PageMinNumbreSizeException;
 import com.daviddiazm.housing.category.domain.models.DepartmentModel;
 import com.daviddiazm.housing.category.domain.models.MunicipalityModel;
 import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePort;
 import com.daviddiazm.housing.category.domain.ports.out.MunicipalityPersistencePort;
 import com.daviddiazm.housing.category.domain.utils.factories.DepartmentFactory;
 import com.daviddiazm.housing.category.domain.utils.factories.MunicipalityFactory;
-import com.daviddiazm.housing.category.domain.utils.validations.PageResultValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,7 +40,7 @@ class MunicipalityUseCaseTest {
         MunicipalityModel municipalityModel = MunicipalityFactory.createMunicipality();
         when(departmentPersistencePort.getDepartmentById(municipalityModel.getDepartmentModel().getId())).thenReturn(null);
 
-        assertThrows(DepartmentIdNotExist.class, () -> municipalityUseCase.saveMunicipality(municipalityModel));
+        assertThrows(DepartmentIdNotExistException.class, () -> municipalityUseCase.saveMunicipality(municipalityModel));
     }
 
     @Test
@@ -69,7 +68,7 @@ class MunicipalityUseCaseTest {
 
         when(departmentPersistencePort.getDepartmentById(municipalityModel.getDepartmentModel().getId())).thenReturn(departmentModel);
 
-        assertThrows(NameAlreadyExist.class, () -> municipalityUseCase.saveMunicipality(municipalityModel));
+        assertThrows(NameAlreadyExistException.class, () -> municipalityUseCase.saveMunicipality(municipalityModel));
     }
 
     @Test
@@ -78,7 +77,7 @@ class MunicipalityUseCaseTest {
         int size = 2;
         boolean ordAsc = true;
         String nameSearch = "name";
-        assertThrows(PageMinNumbrePage.class, () -> municipalityUseCase.getMunicipalitiesPaginated(page, size,ordAsc,nameSearch));
+        assertThrows(PageMinNumbrePageException.class, () -> municipalityUseCase.getMunicipalitiesPaginated(page, size,ordAsc,nameSearch));
     }
     @Test
     void When_GetMunicipalitiesPaginated_SizeIsLessThatOne_Throw_SizeMinNumberPage () {
@@ -86,6 +85,6 @@ class MunicipalityUseCaseTest {
         int size = 0;
         boolean ordAsc = true;
         String nameSearch = "name";
-        assertThrows(PageMinNumbreSize.class, () -> municipalityUseCase.getMunicipalitiesPaginated(page,size,ordAsc,nameSearch));
+        assertThrows(PageMinNumbreSizeException.class, () -> municipalityUseCase.getMunicipalitiesPaginated(page,size,ordAsc,nameSearch));
     }
 }

@@ -8,7 +8,6 @@ import com.daviddiazm.housing.category.application.mappers.MunicipalityDtoMapper
 import com.daviddiazm.housing.category.application.services.MunicipalityService;
 import com.daviddiazm.housing.category.domain.models.MunicipalityModel;
 import com.daviddiazm.housing.category.domain.ports.in.MunicipalityServicePort;
-import com.daviddiazm.housing.category.domain.ports.out.DepartmentPersistencePort;
 import com.daviddiazm.housing.category.domain.utils.constants.MunicipalityConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
