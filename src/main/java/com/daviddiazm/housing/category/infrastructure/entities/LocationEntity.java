@@ -3,6 +3,8 @@ package com.daviddiazm.housing.category.infrastructure.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "location")
 @Data
@@ -20,5 +22,11 @@ public class LocationEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "municipality_id")
     private MunicipalityEntity municipalityEntity;
+
+    @OneToMany(
+            targetEntity= HouseEntity.class,
+            mappedBy = "locationEntity",
+            fetch = FetchType.LAZY)
+    private List<HouseEntity> houses;
 
 }
