@@ -11,10 +11,6 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class ControllerAdvisor {
 
-//    como funciona esto?
-
-
-
     @ExceptionHandler(CategoryNotExistException.class)
     public ResponseEntity<ExceptionResponse> handleCategoryNoExistExceededException(CategoryNotExistException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(DomainConstants.CATEGORY_NO_EXIST, LocalDateTime.now()));

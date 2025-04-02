@@ -8,8 +8,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class HouseUseCaseTest {
@@ -26,4 +30,12 @@ class HouseUseCaseTest {
         houseUseCase.saveHouse(house);
         verify(housePersistencePort).saveHouse(house);
     }
+
+
+    @Test
+    void updateStateHouses_verify_thanSaveHouses () {
+//        List<HouseModel> houses = housePersistencePort.getAllTodayPausedHouses();
+        when(housePersistencePort.getAllTodayPausedHouses()).thenReturn()
+    }
+
 }

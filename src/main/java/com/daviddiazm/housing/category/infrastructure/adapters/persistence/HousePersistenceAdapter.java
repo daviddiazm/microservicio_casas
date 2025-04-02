@@ -27,15 +27,13 @@ public class HousePersistenceAdapter implements HousePersistencePort {
         houseRepository.save(houseEntityMapper.modelToEntity(houseModel));
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
-    public void updateStateHouses() {
-        LocalDate todayDate = LocalDate.now();
-        List<HouseEntity> houses = houseRepository.findAll();
-        for (HouseEntity house : houses) {
-            if(house.getPublishState() == PublishState.PUBLICACION_PAUSADA && (house.getPublishDate().isAfter(todayDate) || house.getPublishDate().isEqual(todayDate)) ){
-                house.setPublishState(PublishState.PUBLICADA);
-            }
-        }
-        houseRepository.saveAll(houses);
+    @Override
+    public List<HouseModel> getAllTodayPausedHouses() {
+        return houseEntityMapper.listEntityToListModel(houseRepository.getAllTodayPausedHouses());
+    }
+
+    @Override
+    public void saveAllHouses(List<HouseModel> houseModels) {
+        houseRepository.saveAll(houseEntityMapper.listModelToListEntity(houseModels));
     }
 }

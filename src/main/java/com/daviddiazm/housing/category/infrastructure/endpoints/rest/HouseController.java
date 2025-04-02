@@ -81,19 +81,7 @@ public class HouseController {
                             name = "location id",
                             description = "the location of the house you want to add",
                             example = "1"
-                    ),
-                    @Parameter(
-                            name = "publish state",
-                            description = "The publish state of the house you want to add.",
-                            schema = @Schema(
-                                    type = "string",
-                                    allowableValues = {"PUBLICADA",
-                                            "PUBLICACION_PAUSADA",
-                                            "TRASACCION_CURSO",
-                                            "TRANSACCION_FINALIZADA"},
-                                    example = "PUBLICADA"
-                            )
-                    ),
+                    )
             },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Two text type data are entered",

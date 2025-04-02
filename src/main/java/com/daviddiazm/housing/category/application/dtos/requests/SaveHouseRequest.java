@@ -13,7 +13,6 @@ public record SaveHouseRequest(
         double price,
         LocalDate publishDate,
         Long categoryModel_id,
-        Long locationModel_id,
-        PublishState publishState
+        Long locationModel_id
 ) {
 }
