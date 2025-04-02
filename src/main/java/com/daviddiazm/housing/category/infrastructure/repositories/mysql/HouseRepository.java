@@ -1,8 +1,11 @@
 package com.daviddiazm.housing.category.infrastructure.repositories.mysql;
 
 import com.daviddiazm.housing.category.infrastructure.entities.HouseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -18,14 +21,22 @@ public interface HouseRepository extends JpaRepository<HouseEntity, Long> {
     )
     List<HouseEntity> getAllTodayPausedHouses();
 
-//    @Query(
-//            value = """
-//                SELECT house.id, address, house.bathrooms_quantity, house.create_date, house.description, house.name, house.price, house.publish_date, house.publish_state, house.rooms_quantity, house.category_id, house.location_id
-//                FROM house
-//                WHERE DATE(house.publish_date) = '2025-04-12' AND house.publish_state = 'PUBLICACION_PAUSADA'
-//                """,
-//            nativeQuery = true
-//    )
-//    List<HouseEntity> getAllTodayPausedHouses();
+    @Query(
+            value = """
+                    SELECT house.id AS id, 
+                    FROM municipality,department
+                    WHERE municipality.department_id = department.id AND (municipality.name LIKE %:value% OR department.name LIKE %:value%)
+                    """,
+            nativeQuery = true
+    )
+    Page<HouseEntity> findHouses(
+            @Param("location") Long location,
+            @Param("category") Long category,
+            @Param("roomsQuantity") int roomsQuantity,
+            @Param("bathroomsQuantity") int bathroomsQuantity,
+            @Param("minPrice") double minPrice,
+            @Param("maxPrice") double maxPrice,
+            Pageable pageable
+    );
 
 }
