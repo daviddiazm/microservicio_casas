@@ -23,9 +23,9 @@ public interface HouseRepository extends JpaRepository<HouseEntity, Long> {
 
     @Query(
             value = """
-                    SELECT house.id AS id, 
-                    FROM municipality,department
-                    WHERE municipality.department_id = department.id AND (municipality.name LIKE %:value% OR department.name LIKE %:value%)
+                    SELECT house.id AS id, house.bathrooms_quantity, house.create_date, house.description, house.name, house.price, house.publish_date, house.publish_state, house.rooms_quantity, house.category_id, house.location_id, category.id AS category_id, category.name AS category_name, category.description AS category_description, location.id AS location_id, location.sector
+                    FROM house, category, location
+                    WHERE :category = category.id AND location = location.id (municipality.name LIKE %:value% OR department.name LIKE %:value%)
                     """,
             nativeQuery = true
     )
