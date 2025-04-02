@@ -1,5 +1,6 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
+import com.daviddiazm.housing.category.domain.enums.PublishState;
 import com.daviddiazm.housing.category.domain.models.HouseModel;
 import com.daviddiazm.housing.category.domain.ports.out.HousePersistencePort;
 import com.daviddiazm.housing.category.domain.utils.factories.HouseFactory;
@@ -8,9 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -34,8 +39,13 @@ class HouseUseCaseTest {
 
     @Test
     void updateStateHouses_verify_thanSaveHouses () {
-//        List<HouseModel> houses = housePersistencePort.getAllTodayPausedHouses();
-        when(housePersistencePort.getAllTodayPausedHouses()).thenReturn()
+        HouseModel house = HouseFactory.createHouse();
+        house.setPublishDate(LocalDate.of(2025,4,2));
+        house.setPublishState(PublishState.PUBLICACION_PAUSADA);
+        when(housePersistencePort.getAllTodayPausedHouses()).thenReturn(List.of(house));
+
+        houseUseCase.updateStateHouses();
+        assertEquals(PublishState.PUBLICADA, house.getPublishState());
     }
 
 }
