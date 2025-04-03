@@ -6,6 +6,7 @@ import com.daviddiazm.housing.category.domain.models.HouseModel;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
 import com.daviddiazm.housing.category.domain.ports.in.HouseServicePort;
 import com.daviddiazm.housing.category.domain.ports.out.HousePersistencePort;
+import com.daviddiazm.housing.category.domain.utils.validations.FilterHouseParametersValidator;
 import com.daviddiazm.housing.category.domain.utils.validations.HouseValidator;
 import com.daviddiazm.housing.category.domain.utils.validations.PageResultValidator;
 
@@ -53,6 +54,7 @@ public class HouseUseCase implements HouseServicePort {
     public PagedResult<HouseModel> filterHousePaged(FilterHouseParameters params) {
         PageResultValidator.validatePage(params.getPage());
         PageResultValidator.validateSize(params.getSize());
+        FilterHouseParametersValidator.validate(params);
         return housePersistencePort.filterHousePaged(params);
     }
 }

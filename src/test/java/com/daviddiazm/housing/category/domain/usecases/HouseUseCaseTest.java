@@ -1,7 +1,9 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
 import com.daviddiazm.housing.category.domain.enums.PublishState;
+import com.daviddiazm.housing.category.domain.models.FilterHouseParameters;
 import com.daviddiazm.housing.category.domain.models.HouseModel;
+import com.daviddiazm.housing.category.domain.models.PagedResult;
 import com.daviddiazm.housing.category.domain.ports.out.HousePersistencePort;
 import com.daviddiazm.housing.category.domain.utils.factories.HouseFactory;
 import org.junit.jupiter.api.Test;
@@ -46,6 +48,27 @@ class HouseUseCaseTest {
 
         houseUseCase.updateStateHouses();
         assertEquals(PublishState.PUBLICADA, house.getPublishState());
+    }
+
+    @Test
+    void filterHousePaged_nullParameters_returnsPagedResult() {
+        // Arrange
+        FilterHouseParameters params = new FilterHouseParameters();
+        params.setPage(0);
+        params.setSize(10);
+        params.setIdCategory(1L);
+        params.setIdLocation(1L);
+
+        List<HouseModel> houses = List.of(HouseFactory.createHouse(), HouseFactory.createHouse());
+
+        PagedResult<HouseModel> expectedResult = new PagedResult<>(houses, 0, 2, true, 2L, 0);
+
+        when(housePersistencePort.filterHousePaged(params)).thenReturn(expectedResult);
+
+        PagedResult<HouseModel> actualResult = houseUseCase.filterHousePaged(params);
+
+        assertEquals(expectedResult, actualResult);
+        verify(housePersistencePort).filterHousePaged(params);
     }
 
 }
