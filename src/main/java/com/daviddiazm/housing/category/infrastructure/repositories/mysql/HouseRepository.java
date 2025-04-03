@@ -21,13 +21,15 @@ public interface HouseRepository extends JpaRepository<HouseEntity, Long> {
     )
     List<HouseEntity> getAllTodayPausedHouses();
 
+
+
     @Query(
-            value = """
-                    SELECT house.id AS id, house.bathrooms_quantity, house.create_date, house.description, house.name, house.price, house.publish_date, house.publish_state, house.rooms_quantity, house.category_id, house.location_id, category.id AS category_id, category.name AS category_name, category.description AS category_description, location.id AS location_id, location.sector
-                    FROM house, category, location
-                    WHERE :category = category.id AND location = location.id (municipality.name LIKE %:value% OR department.name LIKE %:value%)
-                    """,
-            nativeQuery = true
+        value = """
+                SELECT house.id AS id, house.address, house.bathrooms_quantity, house.create_date, house.description, house.name, house.price, house.publish_date, house.publish_state, house.rooms_quantity, category.id AS category_id, category.name AS category_name, category.description AS category_description, location.id AS location_id, location.sector
+                FROM house, category, location
+                WHERE house.category_id = category.id AND house.location_id = location.id AND (:category = 0 OR house.category_id = :category) AND (:location = 0 OR house.location_id = :location) AND (:roomsQuantity = 0 OR house.rooms_quantity = :roomsQuantity) AND (:bathroomsQuantity = 0 OR house.bathrooms_quantity = :bathroomsQuantity) AND (house.price BETWEEN :minPrice AND :maxPrice)
+                """,
+        nativeQuery = true
     )
     Page<HouseEntity> findHouses(
             @Param("location") Long location,
@@ -38,5 +40,4 @@ public interface HouseRepository extends JpaRepository<HouseEntity, Long> {
             @Param("maxPrice") double maxPrice,
             Pageable pageable
     );
-
 }

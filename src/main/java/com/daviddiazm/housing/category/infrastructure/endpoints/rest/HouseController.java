@@ -1,6 +1,9 @@
 package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 
+import com.daviddiazm.housing.category.application.dtos.requests.GetFilterHousePagedRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveHouseRequest;
+import com.daviddiazm.housing.category.application.dtos.responses.HouseResponse;
+import com.daviddiazm.housing.category.application.dtos.responses.PagedResultResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveHouseResponse;
 import com.daviddiazm.housing.category.application.services.HouseService;
 import com.daviddiazm.housing.category.infrastructure.exceptionshandler.ExceptionResponse;
@@ -13,10 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/house")
@@ -122,5 +122,20 @@ public class HouseController {
     @PostMapping("/")
     ResponseEntity<SaveHouseResponse> savePostHouse(@RequestBody SaveHouseRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(houseService.saveHouse(request));
+    }
+
+    @GetMapping("/")
+    ResponseEntity<PagedResultResponse<HouseResponse>> filterHousePaged(
+                                                        @RequestParam int page,
+                                                        @RequestParam int size,
+                                                        @RequestParam boolean orderAsc,
+                                                        @RequestParam Long idLocation,
+                                                        @RequestParam Long idCategory,
+                                                        @RequestParam int roomsQuantity,
+                                                        @RequestParam int bathroomsQuantity,
+                                                        @RequestParam double minPrice,
+                                                        @RequestParam double maxPrice){
+        GetFilterHousePagedRequest request = new GetFilterHousePagedRequest(page,size,orderAsc,idLocation,idCategory,roomsQuantity,bathroomsQuantity,minPrice,maxPrice);
+        return ResponseEntity.ok().body(houseService.filterHousePaged(request));
     }
 }
