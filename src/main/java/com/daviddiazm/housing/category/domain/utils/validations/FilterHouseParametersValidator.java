@@ -1,10 +1,8 @@
 package com.daviddiazm.housing.category.domain.utils.validations;
 
-import com.daviddiazm.housing.category.domain.exceptions.MaxLengthException;
 import com.daviddiazm.housing.category.domain.exceptions.MinLengthException;
 import com.daviddiazm.housing.category.domain.models.FilterHouseParameters;
 import com.daviddiazm.housing.category.domain.utils.constants.GeneralConstants;
-import com.daviddiazm.housing.category.domain.utils.constants.MunicipalityConstants;
 
 public class FilterHouseParametersValidator {
     public static void validate(FilterHouseParameters parameters) {

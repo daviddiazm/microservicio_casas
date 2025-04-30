@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 )
 public class DepartmentController {
 
-//    http://localhost:8081/swagger-ui/index.html
+//    http://localhost:8083/swagger-ui/index.html
 
     private final DepartmentService departmentService;
     @Operation(

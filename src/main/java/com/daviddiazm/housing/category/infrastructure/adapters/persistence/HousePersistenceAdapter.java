@@ -61,7 +61,8 @@ public class HousePersistenceAdapter implements HousePersistencePort {
             pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
         }
 
-        Page<HouseEntity> houseEntities = houseRepository.findHouses(location, category, roomsQuantity, bathroomsQuantity, minPrice, maxPrice, pagination);
+        Page<HouseEntity> houseEntities = houseRepository
+                .findHouses(location, category, roomsQuantity, bathroomsQuantity, minPrice, maxPrice, pagination);
         return new PagedResult<>(
                 houseEntityMapper.listEntityToListModel(houseEntities.getContent()),
                 pagination.getPageNumber(),
