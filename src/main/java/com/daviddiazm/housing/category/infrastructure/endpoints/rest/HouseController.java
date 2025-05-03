@@ -1,6 +1,9 @@
 package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 
+import com.daviddiazm.housing.category.application.dtos.requests.GetFilterHousePagedRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveHouseRequest;
+import com.daviddiazm.housing.category.application.dtos.responses.HouseResponse;
+import com.daviddiazm.housing.category.application.dtos.responses.PagedResultResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveHouseResponse;
 import com.daviddiazm.housing.category.application.services.HouseService;
 import com.daviddiazm.housing.category.infrastructure.exceptionshandler.ExceptionResponse;
@@ -13,10 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/house")
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 )
 public class HouseController {
 
-//    http://localhost:8081/swagger-ui/index.html
+//    http://localhost:8083/swagger-ui/index.html
 
 
     private final HouseService houseService;
@@ -122,5 +122,90 @@ public class HouseController {
     @PostMapping("/")
     ResponseEntity<SaveHouseResponse> savePostHouse(@RequestBody SaveHouseRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(houseService.saveHouse(request));
+    }
+
+    @Operation(
+            method = "GET",
+            summary = "get house paginated",
+            description = "this endpoint is used to get houses by location id, category id, bathrooms and rooms quantity, and its price",
+            parameters = {
+                    @Parameter(
+                            name = "page",
+                            description = "The page you want to be located on",
+                            example = "1"
+                    ),
+                    @Parameter(
+                            name = "size",
+                            description = "The number of houses you want to see on a page",
+                            example = "50"
+                    ),
+                    @Parameter(
+                            name = "orderAsc",
+                            description = "This parameter serves the function of bringing the houses ordered alphabetically with respect to their name",
+                            example = "true"
+                    ),
+                    @Parameter(
+                            name = "id location",
+                            description = "The id location of houses you want to see on a page",
+                            example = "1"
+                    ),
+                    @Parameter(
+                            name = "id category",
+                            description = "The id category of houses you want to see on a page",
+                            example = "1"
+                    ),
+                    @Parameter(
+                            name = "rooms quantity",
+                            description = "The the rooms quantity from the houses you want to see on a page",
+                            example = "1"
+                    ),
+                    @Parameter(
+                            name = "bathrooms quantity",
+                            description = "The the bathrooms quantity from the houses you want to see on a page",
+                            example = "1"
+                    ),
+                    @Parameter(
+                            name = "minimum price",
+                            description = "The minimum price of houses you want to see on a page",
+                            example = "0"
+                    ),
+                    @Parameter(
+                            name = "maximum price",
+                            description = "The maximum price of houses you want to see on a page",
+                            example = "99999"
+                    ),
+            },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "The paginated categories were obtained in the database.",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = PagedResultResponse.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Data was entered incorrectly",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema( implementation = ExceptionResponse.class)
+                            )
+                    )
+            }
+    )
+    @GetMapping("/")
+    ResponseEntity<PagedResultResponse<HouseResponse>> filterHousePaged(
+                                                        @RequestParam int page,
+                                                        @RequestParam int size,
+                                                        @RequestParam boolean orderAsc,
+                                                        @RequestParam Long idLocation,
+                                                        @RequestParam Long idCategory,
+                                                        @RequestParam int roomsQuantity,
+                                                        @RequestParam int bathroomsQuantity,
+                                                        @RequestParam double minPrice,
+                                                        @RequestParam double maxPrice){
+        GetFilterHousePagedRequest request = new GetFilterHousePagedRequest(page,size,orderAsc,idLocation,idCategory,roomsQuantity,bathroomsQuantity,minPrice,maxPrice);
+        return ResponseEntity.ok().body(houseService.filterHousePaged(request));
     }
 }

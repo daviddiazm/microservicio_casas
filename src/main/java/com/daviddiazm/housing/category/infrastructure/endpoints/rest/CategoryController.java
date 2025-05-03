@@ -12,11 +12,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
@@ -26,11 +27,12 @@ import org.springframework.web.bind.annotation.*;
 )
 public class CategoryController {
 
-//    http://localhost:8081/swagger-ui/index.html
+//    http://localhost:8083/swagger-ui/index.html
 
 
     private final CategoryService categoryService;
 
+//    @RolesAllowed("admin")
     @PostMapping("/")
     @Operation(
             method = "POST",
