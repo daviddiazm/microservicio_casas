@@ -143,4 +143,10 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.getCategoriesPaginated(page, size, orderAsc));
     }
 
+
+    @GetMapping("/category-by-name")
+    public ResponseEntity<CategoryResponse> getCategoryByName (String name) {
+        return ResponseEntity.ok().body(categoryService.getCategoryByName(name));
+    }
+
 }

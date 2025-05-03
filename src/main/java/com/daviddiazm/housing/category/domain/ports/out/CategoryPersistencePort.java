@@ -10,4 +10,5 @@ public interface CategoryPersistencePort {
     CategoryModel getCategoryByName(String categoryName);
     List<CategoryModel> getCategoriesByName(String categoryName);
     PagedResult<CategoryModel> getCategoriesPaginated(int page, int size, boolean orderAsc);
+
 }
