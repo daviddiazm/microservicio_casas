@@ -15,6 +15,7 @@ import java.util.List;
 public interface CategoryDtoMapper {
     CategoryModel requestToModel(SaveCategoryRequest saveCategoryRequest);
     List<CategoryResponse> modelListToResponseList(List<CategoryModel> categories);
+    CategoryResponse modelToRequest(CategoryModel categoryModel);
 
     default <T> PagedResultResponse<T> toPagedResultResponse(PagedResult<T> pagedResult) {
         return new PagedResultResponse<>(

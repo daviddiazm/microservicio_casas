@@ -10,6 +10,7 @@ import com.daviddiazm.housing.category.domain.utils.validations.CategoryValidato
 import com.daviddiazm.housing.category.domain.utils.validations.PageResultValidator;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CategoryUseCase implements CategoryServicePort {
 
@@ -54,6 +55,14 @@ public class CategoryUseCase implements CategoryServicePort {
         return categoryPersistencePort.getCategoriesPaginated(page, size, orderAsc);
     }
 
+    @Override
+    public CategoryModel getCategoryByName(String name) {
+        CategoryModel categoryExist = categoryPersistencePort.getCategoryByName(name);
+        if(categoryExist == null) {
+            throw new CategoryNotExistException(DomainConstants.CATEGORY_NO_EXIST);
+        }
+        return categoryExist;
+    }
 
 
 }

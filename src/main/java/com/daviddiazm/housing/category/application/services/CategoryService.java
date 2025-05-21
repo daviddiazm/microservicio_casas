@@ -10,6 +10,6 @@ import java.util.List;
 public interface CategoryService {
     SaveCategoryResponse saveCategory(SaveCategoryRequest saveCategoryRequest);
     PagedResultResponse<CategoryResponse> getCategoriesPaginated(int page, int size, boolean orderAsc);
-
+    CategoryResponse getCategoryByName(String name);
     List<CategoryResponse> getCategotiesByName(String categoryName);
 }
