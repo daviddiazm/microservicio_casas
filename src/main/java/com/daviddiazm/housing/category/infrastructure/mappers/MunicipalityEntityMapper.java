@@ -11,9 +11,19 @@ import java.util.List;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MunicipalityEntityMapper {
+
     @Mapping(source = "departmentModel.id", target = "departmentEntity.id")
     MunicipalityEntity modelToEntity(MunicipalityModel municipalityModel);
 
-    @Mapping(source = "departmentModel.id", target = "departmentEntity.id")
-    List<MunicipalityModel> entityListToModelList (List<MunicipalityEntity> municipalityEntityList);
+    @Mapping(source = "departmentEntity.id", target = "departmentModel.id")
+    @Mapping(source = "departmentEntity.name", target = "departmentModel.name")
+    @Mapping(source = "departmentEntity.description", target = "departmentModel.description")
+    @Mapping(source = "departmentEntity.municipalities", target = "departmentModel.municipalities", ignore = true)
+    MunicipalityModel entityToModel(MunicipalityEntity municipalityEntity);
+
+    default List<MunicipalityModel> entityListToModelList(List<MunicipalityEntity> municipalityEntityList) {
+        return municipalityEntityList.stream()
+                .map(this::entityToModel)
+                .toList();
+    }
 }

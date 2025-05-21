@@ -1,5 +1,6 @@
 package com.daviddiazm.housing.category.infrastructure.adapters.persistence;
 
+import com.daviddiazm.housing.category.domain.models.DepartmentModel;
 import com.daviddiazm.housing.category.domain.models.MunicipalityModel;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
 import com.daviddiazm.housing.category.domain.ports.out.MunicipalityPersistencePort;
@@ -38,16 +39,18 @@ public class MunicipalityPersistenceAdapter implements MunicipalityPersistencePo
         } else {
             pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
         }
-        Page<MunicipalityEntity> municpalityPage = municipalityRepository.findMunicipalities(name, pagination);
-        List<MunicipalityModel> municipalities = municipalityEntityMapper.entityListToModelList(municpalityPage.getContent());
+
+        Page<MunicipalityEntity> municipalityPage = municipalityRepository.findMunicipalities(name, pagination);
+
+        List<MunicipalityModel> municipalities =  municipalityEntityMapper.entityListToModelList(municipalityPage.getContent());
 
         return new PagedResult<>(
                 municipalities,
                 page,
                 size,
                 orderAsc,
-                municpalityPage.getTotalElements(),
-                municpalityPage.getTotalPages()
+                municipalityPage.getTotalElements(),
+                municipalityPage.getTotalPages()
         );
     }
 
