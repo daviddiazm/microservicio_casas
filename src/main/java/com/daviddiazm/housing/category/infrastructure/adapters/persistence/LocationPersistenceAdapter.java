@@ -34,9 +34,9 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
     public PagedResult<LocationModel> getLocationsPaginated(int page, int size, boolean orderAsc, String name) {
         Pageable pagination;
         if (orderAsc) {
-            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());
+            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_SECTOR).ascending());
         } else {
-            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
+            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_SECTOR).descending());
         }
         Page<LocationEntity> locationEntityPage = locationRepository
                                                     .locationsByMunicipalityOrDepartmentName(name, pagination);

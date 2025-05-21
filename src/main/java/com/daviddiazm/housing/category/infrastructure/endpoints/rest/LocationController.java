@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api/locations")
 @RequiredArgsConstructor
@@ -98,7 +99,7 @@ public class LocationController {
                     @Parameter(
                             name = "page",
                             description = "The page you want to be located on",
-                            example = "1"
+                            example = "0"
                     ),
                     @Parameter(
                             name = "size",
@@ -138,7 +139,7 @@ public class LocationController {
     @GetMapping("/")
     ResponseEntity<PagedResult<LocationModel>> getPaginatedLocation(
             @RequestParam int page, @RequestParam int size,
-            @RequestParam boolean orderAsc, @RequestParam String name) {
+            @RequestParam boolean orderAsc, @RequestParam(defaultValue = "") String name ) {
         GetLocationsRequest request = new GetLocationsRequest(page,size,orderAsc,name);
         return ResponseEntity.ok().body(locationService.getLocationsPaginated(request));
     }
