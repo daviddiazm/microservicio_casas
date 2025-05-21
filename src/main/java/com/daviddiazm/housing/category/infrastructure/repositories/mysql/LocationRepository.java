@@ -19,10 +19,9 @@ public interface LocationRepository extends JpaRepository<LocationEntity , Long>
 //    )
     @Query(
             value = """
-                    municipality_id
-                    SELECT municipality.id, municipality.name, municipality.description, municipality.department_id
-                    FROM municipality
-                    
+                    SELECT location.id, location.sector, location.municipality_id ,municipality.id AS id_municipality, municipality.name, municipality.description, municipality.department_id, department.id AS id_department, department.name AS name_department, department.description AS description_department
+                    FROM location, municipality, department
+                    WHERE municipality.department_id = department.id AND location.municipality_id = municipality.id AND (municipality.name LIKE %:value% OR department.name LIKE %:value%)
                     """,
             nativeQuery = true
     )

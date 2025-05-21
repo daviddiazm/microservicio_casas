@@ -15,7 +15,8 @@ public interface LocationEntityMapper {
     @Mapping(source = "municipalityEntity.id", target = "municipalityModel.id")
     @Mapping(source = "municipalityEntity.name", target = "municipalityModel.name")
     @Mapping(source = "municipalityEntity.description", target = "municipalityModel.description")
-    @Mapping(source = "municipalityEntity.departmentEntity", target = "municipalityModel.departmentModel", ignore = true)
+    @Mapping(source = "municipalityEntity.departmentEntity.name", target = "municipalityModel.departmentModel.name")
+    @Mapping(target = "municipalityModel.departmentModel.municipalities", ignore = true)
     @Mapping(source = "municipalityEntity.locations", target = "municipalityModel.locations", ignore = true)
     LocationModel entityToModel(LocationEntity locationEntity);
 
