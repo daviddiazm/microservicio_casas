@@ -9,21 +9,35 @@ import org.springframework.data.repository.query.Param;
 
 public interface LocationRepository extends JpaRepository<LocationEntity , Long> {
 
-//    @Query(
-//            value = """
-//                    SELECT location.id AS id, location.sector AS sector, location.municipality_id, municipality.id AS municipality_id, municipality.name, municipality.description, municipality.department_id, department.id AS id_department, department.name AS name_department, department.description AS description_department
-//                    FROM municipality,department, location
-//                    WHERE municipality.department_id = department.id AND location.municipality_id = municipality.id (municipality.name LIKE %:value% OR department.name LIKE %:value%)
-//                    """,
-//            nativeQuery = true
-//    )
     @Query(
             value = """
-                    SELECT location.id, location.sector, location.municipality_id ,municipality.id AS id_municipality, municipality.name, municipality.description, municipality.department_id, department.id AS id_department, department.name AS name_department, department.description AS description_department
-                    FROM location, municipality, department
-                    WHERE municipality.department_id = department.id AND location.municipality_id = municipality.id AND (municipality.name LIKE %:value% OR department.name LIKE %:value%)
-                    """,
-            nativeQuery = true
-    )
-    Page<LocationEntity> locationsByMunicipalityOrDepartmentName(@Param("value") String name, Pageable pageable);
+        SELECT DISTINCT l FROM LocationEntity l
+        JOIN FETCH l.municipality m
+        JOIN FETCH m.department d
+        WHERE (l.sector LIKE %:value%
+            OR m.name LIKE %:value%
+            OR d.name LIKE %:value%)
+        """,
+            countQuery = """
+        SELECT COUNT(DISTINCT l.id) FROM LocationEntity l
+        JOIN l.municipality m
+        JOIN m.department d
+        WHERE (l.sector LIKE %:value%
+            OR m.name LIKE %:value%
+            OR d.name LIKE %:value%)
+        """)
+    Page<LocationEntity> locationsByMunicipalityOrDepartmentName(
+            @Param("value") String value,
+            Pageable pageable);
+
+    @Query("""
+    SELECT COUNT(DISTINCT l.id) 
+    FROM LocationEntity l
+    JOIN l.municipality m
+    JOIN m.department d
+    WHERE (l.sector LIKE %:value%
+        OR m.name LIKE %:value%
+        OR d.name LIKE %:value%)
+    """)
+    long countAllLocations(@Param("value") String value);
 }

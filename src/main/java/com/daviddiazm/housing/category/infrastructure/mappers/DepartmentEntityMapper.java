@@ -5,8 +5,9 @@ import com.daviddiazm.housing.category.infrastructure.entities.DepartmentEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = MunicipalityEntityMapper.class)
+@Mapper(componentModel = "spring")
 public interface DepartmentEntityMapper {
+
     @Mapping(source = "municipalities", target = "municipalities")
     DepartmentEntity modelToEntity(DepartmentModel departmentModel);
 

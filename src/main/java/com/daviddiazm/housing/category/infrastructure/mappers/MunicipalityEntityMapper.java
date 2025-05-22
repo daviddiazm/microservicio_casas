@@ -7,18 +7,18 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
-
 @Mapper(componentModel = "spring",
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = DepartmentEntityMapper.class)
 public interface MunicipalityEntityMapper {
 
-    @Mapping(source = "departmentModel.id", target = "departmentEntity.id")
+    @Mapping(source = "departmentModel.id", target = "department.id")
     MunicipalityEntity modelToEntity(MunicipalityModel municipalityModel);
 
-    @Mapping(source = "departmentEntity.id", target = "departmentModel.id")
-    @Mapping(source = "departmentEntity.name", target = "departmentModel.name")
-    @Mapping(source = "departmentEntity.description", target = "departmentModel.description")
-    @Mapping(source = "departmentEntity.municipalities", target = "departmentModel.municipalities", ignore = true)
+    @Mapping(source = "department.id", target = "departmentModel.id")
+    @Mapping(source = "department.name", target = "departmentModel.name")
+    @Mapping(source = "department.description", target = "departmentModel.description")
+    @Mapping(target = "departmentModel.municipalities", ignore = true)
     MunicipalityModel entityToModel(MunicipalityEntity municipalityEntity);
 
     default List<MunicipalityModel> entityListToModelList(List<MunicipalityEntity> municipalityEntityList) {

@@ -21,7 +21,7 @@ public class DepartmentEntity {
 
     @OneToMany(
             targetEntity= MunicipalityEntity.class,
-            mappedBy = "departmentEntity",
+            mappedBy = "department",
             fetch = FetchType.LAZY)
     private List<MunicipalityEntity> municipalities;
 }

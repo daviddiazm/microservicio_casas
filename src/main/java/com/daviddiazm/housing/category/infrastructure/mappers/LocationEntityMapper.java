@@ -6,18 +6,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
-
 @Mapper(componentModel = "spring", uses = MunicipalityEntityMapper.class)
 public interface LocationEntityMapper {
-    @Mapping(source = "municipalityModel.id", target = "municipalityEntity.id")
+
+    @Mapping(source = "municipalityModel.id", target = "municipality.id")
     LocationEntity modelToEntity(LocationModel locationModel);
 
-    @Mapping(source = "municipalityEntity.id", target = "municipalityModel.id")
-    @Mapping(source = "municipalityEntity.name", target = "municipalityModel.name")
-    @Mapping(source = "municipalityEntity.description", target = "municipalityModel.description")
-    @Mapping(source = "municipalityEntity.departmentEntity.name", target = "municipalityModel.departmentModel.name")
+    @Mapping(source = "municipality.id", target = "municipalityModel.id")
+    @Mapping(source = "municipality.name", target = "municipalityModel.name")
+    @Mapping(source = "municipality.description", target = "municipalityModel.description")
+    @Mapping(source = "municipality.department.name", target = "municipalityModel.departmentModel.name")
     @Mapping(target = "municipalityModel.departmentModel.municipalities", ignore = true)
-    @Mapping(source = "municipalityEntity.locations", target = "municipalityModel.locations", ignore = true)
+    @Mapping(source = "municipality.locations", target = "municipalityModel.locations", ignore = true)
     LocationModel entityToModel(LocationEntity locationEntity);
 
     default List<LocationModel> entityListToModelList(List<LocationEntity> locationEntityList) {

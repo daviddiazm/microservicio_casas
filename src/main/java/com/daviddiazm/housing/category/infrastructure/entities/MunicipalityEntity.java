@@ -21,11 +21,11 @@ public class MunicipalityEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
-    private DepartmentEntity departmentEntity;
+    private DepartmentEntity department;
 
     @OneToMany(
             targetEntity= LocationEntity.class,
-            mappedBy = "municipalityEntity",
+            mappedBy = "municipality",
             fetch = FetchType.LAZY)
     private List<LocationEntity> locations;
 }

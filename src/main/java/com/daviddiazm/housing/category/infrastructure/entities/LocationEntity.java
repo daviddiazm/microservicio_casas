@@ -21,7 +21,7 @@ public class LocationEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "municipality_id")
-    private MunicipalityEntity municipalityEntity;
+    private MunicipalityEntity municipality;
 
     @OneToMany(
             targetEntity= HouseEntity.class,

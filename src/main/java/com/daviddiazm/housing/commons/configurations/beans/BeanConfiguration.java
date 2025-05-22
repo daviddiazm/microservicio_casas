@@ -68,7 +68,7 @@ public class BeanConfiguration {
 
     @Bean
     public LocationPersistencePort locationPersistencePort() {
-        return  new LocationPersistenceAdapter(locationRepository, locationEntityMapper);
+        return new LocationPersistenceAdapter(locationRepository, locationEntityMapper);
     }
 
 

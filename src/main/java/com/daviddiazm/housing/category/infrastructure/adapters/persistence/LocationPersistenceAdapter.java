@@ -15,8 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -32,24 +30,20 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
 
     @Override
     public PagedResult<LocationModel> getLocationsPaginated(int page, int size, boolean orderAsc, String name) {
-        Pageable pagination;
-        if (orderAsc) {
-            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_SECTOR).ascending());
-        } else {
-            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_SECTOR).descending());
-        }
-        Page<LocationEntity> locationEntityPage = locationRepository
-                                                    .locationsByMunicipalityOrDepartmentName(name, pagination);
+        Pageable pagination = PageRequest.of(page, size, Sort.by(orderAsc ? Sort.Direction.ASC : Sort.Direction.DESC, Constants.PAGEABLE_FIELD_SECTOR));
 
-        List<LocationModel> locationsModels = locationEntityMapper.entityListToModelList(locationEntityPage.getContent());
+        Page<LocationEntity> locationEntityPage = locationRepository.locationsByMunicipalityOrDepartmentName(name, pagination);
+
+        long totalElements = locationRepository.countAllLocations(name);
 
         return new PagedResult<>(
-                locationsModels,
+                locationEntityMapper.entityListToModelList(locationEntityPage.getContent()),
                 page,
                 size,
                 orderAsc,
-                locationEntityPage.getTotalElements(),
+                totalElements,
                 locationEntityPage.getTotalPages()
         );
     }
+
 }
