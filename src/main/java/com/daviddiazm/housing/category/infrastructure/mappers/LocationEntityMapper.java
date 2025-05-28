@@ -4,14 +4,17 @@ import com.daviddiazm.housing.category.domain.models.LocationModel;
 import com.daviddiazm.housing.category.infrastructure.entities.LocationEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
-@Mapper(componentModel = "spring", uses = MunicipalityEntityMapper.class)
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = MunicipalityEntityMapper.class)
 public interface LocationEntityMapper {
 
     @Mapping(source = "municipalityModel.id", target = "municipality.id")
     LocationEntity modelToEntity(LocationModel locationModel);
 
+    @Mapping(target = "houses", ignore = true)
     @Mapping(source = "municipality.id", target = "municipalityModel.id")
     @Mapping(source = "municipality.name", target = "municipalityModel.name")
     @Mapping(source = "municipality.description", target = "municipalityModel.description")

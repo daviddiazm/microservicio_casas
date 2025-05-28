@@ -17,8 +17,8 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface HouseDtoMapper {
 
-    @Mapping(source = "categoryModel_id", target = "categoryModel.id")
-    @Mapping(source = "locationModel_id", target = "locationModel.id")
+    @Mapping(source = "categoryModel_id", target = "category.id")
+    @Mapping(source = "locationModel_id", target = "location.id")
     HouseModel requestToModel(SaveHouseRequest saveHouseRequest);
 
     FilterHouseParameters requestFilterToModelFilter(GetFilterHousePagedRequest request);

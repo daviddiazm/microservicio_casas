@@ -19,7 +19,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class HouseServiceImp implements HouseService {
+public class
+HouseServiceImp implements HouseService {
 
     private final HouseDtoMapper houseDtoMapper;
     private final HouseServicePort houseServicePort;

@@ -23,7 +23,7 @@ public class CategoryEntity {
 
     @OneToMany(
             targetEntity= HouseEntity.class,
-            mappedBy = "categoryEntity",
+            mappedBy = "category",
             fetch = FetchType.LAZY)
     private List<HouseEntity> houses;
 }

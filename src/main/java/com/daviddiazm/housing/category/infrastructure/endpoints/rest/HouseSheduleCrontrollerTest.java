@@ -3,10 +3,9 @@ package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 import com.daviddiazm.housing.category.infrastructure.scheduleds.HouseScheduled;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api/house-test")
 @RequiredArgsConstructor

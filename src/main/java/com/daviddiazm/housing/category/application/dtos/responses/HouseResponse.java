@@ -16,8 +16,8 @@ public record HouseResponse(
         double price,
         LocalDate createDate,
         LocalDate publishDate,
-        CategoryModel categoryModel,
-        LocationModel locationModel,
+        CategoryModel category,
+        LocationModel location,
         PublishState publishState
 ) {
 }

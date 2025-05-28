@@ -32,11 +32,11 @@ public class HouseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
-    private CategoryEntity categoryEntity;
+    private CategoryEntity category;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id")
-    private LocationEntity locationEntity;
+    private LocationEntity location;
 
     @Enumerated(EnumType.STRING)
     private PublishState publishState;

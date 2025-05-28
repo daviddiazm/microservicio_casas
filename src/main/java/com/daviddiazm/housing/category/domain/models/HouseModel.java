@@ -14,14 +14,14 @@ public class HouseModel {
     private double price;
     private LocalDate createDate;
     private LocalDate publishDate;
-    private CategoryModel categoryModel;
-    private LocationModel locationModel;
+    private CategoryModel category;
+    private LocationModel location;
     private PublishState publishState;
 
     public HouseModel() {
     }
 
-    public HouseModel(Long id, String name, String description, int roomsQuantity, int bathroomsQuantity, String address, double price, LocalDate createDate, LocalDate publishDate, CategoryModel categoryModel, LocationModel locationModel, PublishState publishState) {
+    public HouseModel(Long id, String name, String description, int roomsQuantity, int bathroomsQuantity, String address, double price, LocalDate createDate, LocalDate publishDate, CategoryModel category, LocationModel location, PublishState publishState) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -31,8 +31,8 @@ public class HouseModel {
         this.price = price;
         this.createDate = createDate;
         this.publishDate = publishDate;
-        this.categoryModel = categoryModel;
-        this.locationModel = locationModel;
+        this.category = category;
+        this.location = location;
         this.publishState = publishState;
     }
 
@@ -108,20 +108,20 @@ public class HouseModel {
         this.publishDate = publishDate;
     }
 
-    public CategoryModel getCategoryModel() {
-        return categoryModel;
+    public CategoryModel getCategory() {
+        return category;
     }
 
-    public void setCategoryModel(CategoryModel categoryModel) {
-        this.categoryModel = categoryModel;
+    public void setCategory(CategoryModel category) {
+        this.category = category;
     }
 
-    public LocationModel getLocationModel() {
-        return locationModel;
+    public LocationModel getLocation() {
+        return location;
     }
 
-    public void setLocationModel(LocationModel locationModel) {
-        this.locationModel = locationModel;
+    public void setLocation(LocationModel location) {
+        this.location = location;
     }
 
     public PublishState getPublishState() {
@@ -144,8 +144,8 @@ public class HouseModel {
                 ", price=" + price +
                 ", createDate=" + createDate +
                 ", publishDate=" + publishDate +
-                ", categoryModel=" + categoryModel +
-                ", locationModel=" + locationModel +
+                ", category=" + category +
+                ", location=" + location +
                 ", publishState=" + publishState +
                 '}';
     }

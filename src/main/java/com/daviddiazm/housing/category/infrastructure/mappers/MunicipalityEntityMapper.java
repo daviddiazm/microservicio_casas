@@ -15,6 +15,7 @@ public interface MunicipalityEntityMapper {
     @Mapping(source = "departmentModel.id", target = "department.id")
     MunicipalityEntity modelToEntity(MunicipalityModel municipalityModel);
 
+    @Mapping(target = "locations", ignore = true)
     @Mapping(source = "department.id", target = "departmentModel.id")
     @Mapping(source = "department.name", target = "departmentModel.name")
     @Mapping(source = "department.description", target = "departmentModel.description")

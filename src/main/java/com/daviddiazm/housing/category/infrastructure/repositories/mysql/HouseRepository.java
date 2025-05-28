@@ -40,4 +40,5 @@ public interface HouseRepository extends JpaRepository<HouseEntity, Long> {
             @Param("maxPrice") double maxPrice,
             Pageable pageable
     );
+
 }

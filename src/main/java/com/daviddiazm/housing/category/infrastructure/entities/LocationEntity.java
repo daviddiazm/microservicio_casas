@@ -25,7 +25,7 @@ public class LocationEntity {
 
     @OneToMany(
             targetEntity= HouseEntity.class,
-            mappedBy = "locationEntity",
+            mappedBy = "location",
             fetch = FetchType.LAZY)
     private List<HouseEntity> houses;
 

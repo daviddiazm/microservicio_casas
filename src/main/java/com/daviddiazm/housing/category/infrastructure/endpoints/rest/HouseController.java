@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api/house")
 @RequiredArgsConstructor
@@ -132,7 +133,7 @@ public class HouseController {
                     @Parameter(
                             name = "page",
                             description = "The page you want to be located on",
-                            example = "1"
+                            example = "0"
                     ),
                     @Parameter(
                             name = "size",
@@ -145,32 +146,32 @@ public class HouseController {
                             example = "true"
                     ),
                     @Parameter(
-                            name = "id location",
+                            name = "idLocation",
                             description = "The id location of houses you want to see on a page",
                             example = "1"
                     ),
                     @Parameter(
-                            name = "id category",
+                            name = "idCategory",
                             description = "The id category of houses you want to see on a page",
                             example = "1"
                     ),
                     @Parameter(
-                            name = "rooms quantity",
+                            name = "roomsQuantity",
                             description = "The the rooms quantity from the houses you want to see on a page",
-                            example = "1"
+                            example = "0"
                     ),
                     @Parameter(
-                            name = "bathrooms quantity",
+                            name = "bathroomsQuantity",
                             description = "The the bathrooms quantity from the houses you want to see on a page",
-                            example = "1"
+                            example = "0"
                     ),
                     @Parameter(
-                            name = "minimum price",
+                            name = "minPrice",
                             description = "The minimum price of houses you want to see on a page",
                             example = "0"
                     ),
                     @Parameter(
-                            name = "maximum price",
+                            name = "maxPrice",
                             description = "The maximum price of houses you want to see on a page",
                             example = "99999"
                     ),
