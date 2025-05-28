@@ -3,6 +3,7 @@ package com.daviddiazm.housing.category.infrastructure.endpoints.rest;
 import com.daviddiazm.housing.category.application.dtos.requests.GetLocationsRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveLocationRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveMunicipalityRequest;
+import com.daviddiazm.housing.category.application.dtos.responses.LocationResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.PagedResultResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveLocationResponse;
 import com.daviddiazm.housing.category.application.dtos.responses.SaveMunicipalityResponse;
@@ -20,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
@@ -143,4 +146,10 @@ public class LocationController {
         GetLocationsRequest request = new GetLocationsRequest(page,size,orderAsc,name);
         return ResponseEntity.ok().body(locationService.getLocationsPaginated(request));
     }
+
+    @GetMapping("/by-city/")
+    ResponseEntity<List<LocationResponse>> getLocationByCity(long cityId){
+        return ResponseEntity.ok().body(locationService.getLocationsByCityId(cityId));
+    }
+
 }

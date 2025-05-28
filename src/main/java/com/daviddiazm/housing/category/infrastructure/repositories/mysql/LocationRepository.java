@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface LocationRepository extends JpaRepository<LocationEntity , Long> {
 
     @Query(
@@ -40,4 +42,7 @@ public interface LocationRepository extends JpaRepository<LocationEntity , Long>
         OR d.name LIKE %:value%)
     """)
     long countAllLocations(@Param("value") String value);
+
+    @Query("SELECT DISTINCT l FROM LocationEntity l WHERE l.municipality.id = :cityId")
+    List<LocationEntity> getLocationByCiyId(long cityId);
 }

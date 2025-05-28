@@ -15,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -44,6 +46,15 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
                 totalElements,
                 locationEntityPage.getTotalPages()
         );
+    }
+
+    @Override
+    public List<LocationModel> getLocationsByCityId(long cityId) {
+        List<LocationModel> locations = locationEntityMapper.entityListToModelList(locationRepository.getLocationByCiyId(cityId));
+        if(locations != null) {
+            return locations;
+        }
+        return List.of();
     }
 
 }

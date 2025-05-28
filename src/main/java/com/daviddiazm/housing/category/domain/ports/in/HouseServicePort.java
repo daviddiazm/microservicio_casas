@@ -8,4 +8,5 @@ public interface HouseServicePort {
     void saveHouse(HouseModel houseModel);
     void updateStateHouses();
     PagedResult<HouseModel> filterHousePaged(FilterHouseParameters params);
+    PagedResult<HouseModel> filterHouseByCityNamePaged(FilterHouseParameters params);
 }

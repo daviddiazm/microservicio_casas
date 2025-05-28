@@ -11,6 +11,8 @@ import com.daviddiazm.housing.category.domain.utils.constants.LocationConstants;
 import com.daviddiazm.housing.category.domain.utils.validations.LocationValidator;
 import com.daviddiazm.housing.category.domain.utils.validations.PageResultValidator;
 
+import java.util.List;
+
 public class LocationUseCase implements LocationServicePort {
 
     private final LocationPersistencePort locationPersistencePort;
@@ -37,5 +39,14 @@ public class LocationUseCase implements LocationServicePort {
         PageResultValidator.validateSize(size);
         String lowerName = name.toLowerCase();
         return locationPersistencePort.getLocationsPaginated(page, size, orderAsc,lowerName);
+    }
+
+    @Override
+    public List<LocationModel> getLocationsByCityId(long cityId) {
+        List<LocationModel> locations = locationPersistencePort.getLocationsByCityId(cityId);
+        if(locations.isEmpty()) {
+            return List.of();
+        }
+        return locations;
     }
 }
