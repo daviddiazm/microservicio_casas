@@ -287,7 +287,7 @@ public class HouseController {
                                                         @RequestParam int page,
                                                         @RequestParam int size,
                                                         @RequestParam boolean orderAsc,
-                                                        @RequestParam String cityName,
+                                                        @RequestParam(defaultValue = "") String cityName,
                                                         @RequestParam Long idCategory,
                                                         @RequestParam int roomsQuantity,
                                                         @RequestParam int bathroomsQuantity,

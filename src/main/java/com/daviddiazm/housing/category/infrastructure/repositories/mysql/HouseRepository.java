@@ -46,7 +46,7 @@ public interface HouseRepository extends JpaRepository<HouseEntity, Long> {
         value = """
                 SELECT house.id AS id, house.address, house.bathrooms_quantity, house.create_date, house.description, house.name, house.price, house.publish_date, house.publish_state, house.rooms_quantity, category.id AS category_id, category.name AS category_name, category.description AS category_description, location.id AS location_id, location.sector, municipality.id AS  municipality_id, municipality.name AS municipalityName , municipality.description AS municipalityDescription
                 FROM house, category, location, municipality
-                WHERE house.category_id = category.id AND house.location_id = location.id AND location.municipality_id = municipality.id AND (municipality.name = %:cityName%) AND (:category = 0 OR house.category_id = :category) AND (:roomsQuantity = 0 OR house.rooms_quantity = :roomsQuantity) AND (:bathroomsQuantity = 0 OR house.bathrooms_quantity = :bathroomsQuantity) AND (house.price BETWEEN :minPrice AND :maxPrice)
+                WHERE house.category_id = category.id AND house.location_id = location.id AND location.municipality_id = municipality.id AND (:cityName = '' OR municipality.name = :cityName) AND (:category = 0 OR house.category_id = :category) AND (:roomsQuantity = 0 OR house.rooms_quantity = :roomsQuantity) AND (:bathroomsQuantity = 0 OR house.bathrooms_quantity = :bathroomsQuantity) AND (house.price BETWEEN :minPrice AND :maxPrice)
                 """,
         nativeQuery = true
     )
