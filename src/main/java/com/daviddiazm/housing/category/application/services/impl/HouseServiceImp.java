@@ -1,5 +1,6 @@
 package com.daviddiazm.housing.category.application.services.impl;
 
+import com.daviddiazm.housing.category.application.dtos.requests.GetFilterHouseByCityNameRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.GetFilterHousePagedRequest;
 import com.daviddiazm.housing.category.application.dtos.requests.SaveHouseRequest;
 import com.daviddiazm.housing.category.application.dtos.responses.HouseResponse;
@@ -36,6 +37,20 @@ HouseServiceImp implements HouseService {
         PagedResult<HouseModel> housesModel = houseServicePort.filterHousePaged(houseDtoMapper.requestFilterToModelFilter(request));
         List<HouseResponse> houses = houseDtoMapper.modelListToResponseList(housesModel.getContent());
         return new PagedResultResponse<>(
+                houses,
+                housesModel.getPage(),
+                housesModel.getSize(),
+                housesModel.isOrderAsc(),
+                housesModel.getTotalElements(),
+                housesModel.getTotalPages()
+        );
+    }
+
+    @Override
+    public PagedResult<HouseResponse> filterHouseByCityNamePaged(GetFilterHouseByCityNameRequest params) {
+        PagedResult<HouseModel> housesModel = houseServicePort.filterHouseByCityNamePaged(houseDtoMapper.requestToModelFilter(params));
+        List<HouseResponse> houses = houseDtoMapper.modelListToResponseList(housesModel.getContent());
+        return new PagedResult<>(
                 houses,
                 housesModel.getPage(),
                 housesModel.getSize(),

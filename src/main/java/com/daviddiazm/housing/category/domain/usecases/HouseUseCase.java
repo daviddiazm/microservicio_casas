@@ -1,11 +1,13 @@
 package com.daviddiazm.housing.category.domain.usecases;
 
 import com.daviddiazm.housing.category.domain.enums.PublishState;
+import com.daviddiazm.housing.category.domain.models.FilterHouseByCityNameParams;
 import com.daviddiazm.housing.category.domain.models.FilterHouseParameters;
 import com.daviddiazm.housing.category.domain.models.HouseModel;
 import com.daviddiazm.housing.category.domain.models.PagedResult;
 import com.daviddiazm.housing.category.domain.ports.in.HouseServicePort;
 import com.daviddiazm.housing.category.domain.ports.out.HousePersistencePort;
+import com.daviddiazm.housing.category.domain.utils.validations.FilterHouseByCityNameValidator;
 import com.daviddiazm.housing.category.domain.utils.validations.FilterHouseParametersValidator;
 import com.daviddiazm.housing.category.domain.utils.validations.HouseValidator;
 import com.daviddiazm.housing.category.domain.utils.validations.PageResultValidator;
@@ -56,5 +58,13 @@ public class HouseUseCase implements HouseServicePort {
         PageResultValidator.validateSize(params.getSize());
         FilterHouseParametersValidator.validate(params);
         return housePersistencePort.filterHousePaged(params);
+    }
+
+    @Override
+    public PagedResult<HouseModel> filterHouseByCityNamePaged(FilterHouseByCityNameParams params) {
+        PageResultValidator.validatePage(params.getPage());
+        PageResultValidator.validateSize(params.getSize());
+        FilterHouseByCityNameValidator.validate(params);
+        return housePersistencePort.filterHouseByCityNamePaged(params);
     }
 }

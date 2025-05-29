@@ -72,4 +72,35 @@ public class HousePersistenceAdapter implements HousePersistencePort {
                 houseEntities.getTotalPages()
         );
     }
+
+    @Override
+    public PagedResult<HouseModel> filterHouseByCityNamePaged(FilterHouseByCityNameParams params) {
+        int page = params.getPage();
+        int size = params.getSize();
+        boolean orderAsc = params.isOrderAsc();
+        String cityName = params.getCityName();
+        Long category = params.getIdCategory();
+        int roomsQuantity = params.getRoomsQuantity();
+        int bathroomsQuantity = params.getBathroomsQuantity();
+        double minPrice = params.getMinPrice();
+        double maxPrice = params.getMaxPrice();
+
+        Pageable pagination;
+        if (orderAsc) {
+            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());
+        } else {
+            pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).descending());
+        }
+
+        Page<HouseEntity> houseEntities = houseRepository
+                .findHousesByCityName(cityName, category, roomsQuantity, bathroomsQuantity, minPrice, maxPrice, pagination);
+        return new PagedResult<>(
+                houseEntityMapper.listEntityToListModel(houseEntities.getContent()),
+                pagination.getPageNumber(),
+                houseEntities.getSize(),
+                orderAsc,
+                houseEntities.getTotalElements(),
+                houseEntities.getTotalPages()
+        );
+    }
 }
